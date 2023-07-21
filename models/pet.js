@@ -14,6 +14,10 @@ const petSchema = Schema(
       default: [],
       required: true,
     },
+    title: {
+      type: String,
+      default: "This is my lovely pet",
+    },
     category: {
       type: String,
       enum: ["sell", "lost-found", "for-free", "my-pet"],

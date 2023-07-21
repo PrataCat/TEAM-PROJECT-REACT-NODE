@@ -7,7 +7,7 @@ const { createHashPass } = require("../../helpers/hashPass");
 const { sendEmail } = require("../../helpers");
 
 const register = catchAsyncWrapper(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
   const hashPass = await createHashPass(password);
   const verificationToken = v4();
@@ -25,7 +25,6 @@ const register = catchAsyncWrapper(async (req, res, next) => {
     user: {
       name: newUser.name,
       email: newUser.email,
-      password: newUser.password,
     },
     message: "Your registration is success",
   });

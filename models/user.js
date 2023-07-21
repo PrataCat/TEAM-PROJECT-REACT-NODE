@@ -44,7 +44,6 @@ const userSchema = Schema(
     pets: {
       type: Schema.Types.ObjectId,
       ref: "pet",
-      // required: true,
     },
   },
   {

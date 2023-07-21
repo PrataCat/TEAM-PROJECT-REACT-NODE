@@ -7,6 +7,7 @@ const User = require("../models/user");
 
 const validateLogin = () => {
   const func = catchAsyncWrapper(async (req, res, next) => {
+    console.log("login");
     const { email, password } = req.body;
     const { error } = userLoginValidator(req.body);
 

@@ -35,7 +35,10 @@ router.patch(
   updateUserAvatar
 );
 router.patch("/update", authenticate, validateUpdateUser(), updateUser);
-// upload.array([{name: "avatar", maxCount: 1}, {name: "emblem", maxCount: 1}])
-// upload.fields("avatar", <max number of files>)
+router.patch(
+  "/photo",
+  authenticate,
+  upload.single("petPhoto") // контролер для оновлення фото тварини
+);
 
 module.exports = router;
