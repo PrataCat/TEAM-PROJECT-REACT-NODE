@@ -30,8 +30,8 @@ const userSchema = Schema(
       type: String,
       default: "Kyiv",
     },
-    avatar: { type: String },
-    token: { type: String, default: null },
+    avatar: String,
+    token: { type: String, default: "" },
     verify: {
       type: Boolean,
       default: false,
@@ -40,6 +40,11 @@ const userSchema = Schema(
       type: String,
       default: "",
       required: [true, "Verify token is required"],
+    },
+    pets: {
+      type: Schema.Types.ObjectId,
+      ref: "pet",
+      // required: true,
     },
   },
   {

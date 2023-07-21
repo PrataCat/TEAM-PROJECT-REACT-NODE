@@ -1,8 +1,6 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const CustomError = require("../../helpers/customError");
+const CustomError = require("../../helpers/CustomError");
 const User = require("../../models/user");
-
-//* need to check
 
 const verifyEmail = catchAsyncWrapper(async (req, res, next) => {
   const { verificationToken } = req.params;
@@ -15,7 +13,7 @@ const verifyEmail = catchAsyncWrapper(async (req, res, next) => {
 
   await User.findByIdAndUpdate(user._id, {
     verify: true,
-    verificationToken: null,
+    verificationToken: "",
   });
 
   res.json({

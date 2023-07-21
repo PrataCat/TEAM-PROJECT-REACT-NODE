@@ -1,49 +1,33 @@
 const gravatar = require("gravatar");
 const { v4 } = require("uuid");
 
-const CustomError = require("../../helpers/customError");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 const { createHashPass } = require("../../helpers/hashPass");
 const { sendEmail } = require("../../helpers");
 
-const { BASE_URL } = process.env;
-
-//* need to check
-
 const register = catchAsyncWrapper(async (req, res, next) => {
-  const { email, password } = req.body;
-
-  const user = await User.findOne({ email });
-
-  if (user) {
-    return next(new CustomError(409, "Email in use"));
-  }
+  const { name, email, password } = req.body;
 
   const hashPass = await createHashPass(password);
-  const avatarURL = gravatar.url(email);
   const verificationToken = v4();
 
   const newUser = await User.create({
     ...req.body,
     password: hashPass,
-    avatarURL,
+    avatar: gravatar.url(email),
     verificationToken,
   });
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">Click verify email</a>`,
-  };
-
-  await sendEmail(verifyEmail);
+  await sendEmail(email, verificationToken);
 
   res.status(201).json({
     user: {
+      name: newUser.name,
       email: newUser.email,
-      subscription: newUser.subscription,
+      password: newUser.password,
     },
+    message: "Your registration is success",
   });
 });
 

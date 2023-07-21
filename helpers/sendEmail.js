@@ -1,16 +1,20 @@
 const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
-//* need to check
-
-const { SENDGRID_API_KEY, SENDGRID_EMAIL } = process.env;
+const { SENDGRID_API_KEY, SENDGRID_EMAIL, BASE_URL } = process.env;
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-const sendEmail = async (data) => {
-  const email = { ...data, from: SENDGRID_EMAIL };
+const sendEmail = async (email, verificationToken) => {
+  const msg = {
+    from: SENDGRID_EMAIL,
+    to: email,
+    subject: "Verify email",
+    text: "To starting use our site please verify your email and sign in",
+    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify email</a>`,
+  };
 
-  await sgMail.send(email);
+  await sgMail.send(msg);
 
   return true;
 };
