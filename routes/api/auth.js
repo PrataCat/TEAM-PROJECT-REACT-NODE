@@ -5,27 +5,36 @@ const {
   login,
   logout,
   getCurrentUser,
-  updateUserData,
+  updateUserAvatar,
+  updateUser,
   verifyEmail,
   resendVerifyEmail,
 } = require("../../controllers/auth");
 
 const {
-  validateUser,
+  validateRegister,
+  validateLogin,
   authenticate,
   validateEmail,
   upload,
+  validateUpdateUser,
 } = require("../../middlewares");
 
 const router = express.Router();
 
-router.post("/register", validateUser(), register);
+router.post("/register", validateRegister(), register);
 router.get("/verify/:verificationToken", verifyEmail);
 router.post("/verify", validateEmail(), resendVerifyEmail);
-router.post("/login", validateUser(), login);
+router.post("/login", validateLogin(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrentUser);
-router.patch("/avatars", authenticate, upload.single("avatar"), updateUserData);
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  updateUserAvatar
+);
+router.patch("/update", authenticate, validateUpdateUser(), updateUser);
 // upload.array([{name: "avatar", maxCount: 1}, {name: "emblem", maxCount: 1}])
 // upload.fields("avatar", <max number of files>)
 

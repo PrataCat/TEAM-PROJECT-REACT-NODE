@@ -1,6 +1,9 @@
 const petValidator = require("./petValidator");
 const favoriteValidator = require("./favoriteValidator");
-const userValidator = require("./userValidator");
+const {
+  userRegisterValidator,
+  userLoginValidator,
+} = require("./userValidator");
 const handleMongooseError = require("./handleMongooseError");
 const sendEmail = require("./sendEmail");
 const emailValidator = require("./emailValidator");
@@ -8,7 +11,8 @@ const emailValidator = require("./emailValidator");
 module.exports = {
   petValidator,
   favoriteValidator,
-  userValidator,
+  userRegisterValidator,
+  userLoginValidator,
   handleMongooseError,
   sendEmail,
   emailValidator,

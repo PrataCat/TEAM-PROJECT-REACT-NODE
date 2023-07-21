@@ -4,28 +4,23 @@ const CustomError = require("../helpers/CustomError");
 const User = require("../models/user");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
-const { JWT_KEY } = process.env;
-
 const authenticate = catchAsyncWrapper(async (req, res, next) => {
-  const { authorization = "" } = req.headers;
-  const [bearer, token] = authorization.split(" ");
+  const token =
+    req.headers.authorization?.startsWith("Bearer") &&
+    req.headers.authorization.split(" ")[1];
 
-  if (bearer !== "Bearer") {
-    next(new CustomError(401, "Not authorized"));
+  if (!token) {
+    return next(new CustomError(401, "Not authorized"));
   }
 
-  try {
-    const { id } = jwt.verify(token, JWT_KEY);
-    const user = await User.findById(id);
+  const { id } = jwt.verify(token, process.env.JWT_KEY);
+  const user = await User.findById(id);
 
-    if (!user || !user.token || user.token !== token) {
-      next(new CustomError(401, "Not authorized"));
-    }
-
-    req.user = user;
-  } catch (error) {
-    next(new CustomError(401, "Not authorized"));
+  if (!user || !user.token) {
+    return next(new CustomError(401, "Not authorized"));
   }
+
+  req.user = user;
 
   next();
 });

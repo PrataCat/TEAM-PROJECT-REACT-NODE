@@ -6,16 +6,15 @@ const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const CustomError = require("../../helpers/CustomError");
 const User = require("../../models/user");
 
-//* need to check and change
-
-const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
-
-const updateUserData = catchAsyncWrapper(async (req, res, next) => {
-  console.log(req.file);
-
+const updateUserAvatar = catchAsyncWrapper(async (req, res, next) => {
   if (!req.file) {
-    return new CustomError(400, "Missing 'avatar' field");
+    return next(new CustomError(400, "Missing 'avatar' field"));
   }
+
+  const { path: tempUpload, originalname } = req.file;
+  const { _id } = req.user;
+
+  const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
 
   const img = await jimp.read(req.file.path);
 
@@ -23,9 +22,6 @@ const updateUserData = catchAsyncWrapper(async (req, res, next) => {
     .autocrop()
     .cover(250, 250, jimp.HORIZONTAL_ALIGN_CENTER || jimp.VERTICAL_ALIGN_MIDDLE)
     .writeAsync(req.file.path);
-
-  const { path: tempUpload, originalname } = req.file;
-  const { _id } = req.user;
 
   const fileName = `${_id}_${originalname}`;
 
@@ -38,8 +34,8 @@ const updateUserData = catchAsyncWrapper(async (req, res, next) => {
   await User.findByIdAndUpdate(_id, { avatarURL });
 
   res.json({
-    avatarURL: avatarURL,
+    avatar: avatarURL,
   });
 });
 
-module.exports = updateUserData;
+module.exports = updateUserAvatar;
