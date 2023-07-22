@@ -17,6 +17,10 @@
     {
       "name": "Pets",
       "description": "Pets endpoints"
+    },
+    {
+      "name": "News",
+      "description": "News endpoint"
     }
   ],
 
@@ -59,8 +63,59 @@
           }
         }
       }
+    },
+    "/news": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Get news articles",
+        "description": "Get all news",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "search news by keyword in the title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "number of news articles per page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
     }
   },
+
   "components": {
     "schemas": {
       "RegistrationRequest": {
@@ -92,14 +147,73 @@
             "description": "User's id",
             "example": "4546578697978888"
           }
+        }
+      },
+      "NewsResponse": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "current page",
+            "example": 1
+          },
+          "perPage": {
+            "type": "integer",
+            "description": "number of news articles per page",
+            "example": 6
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "total pages",
+            "example": 5
+          },
+          "news": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "id",
+                  "example": "64ba71b318141666e961ba32"
+                },
+                "imgUrl": {
+                  "type": "string",
+                  "description": "image of article",
+                  "example": "https://www.nytimes.com/images/2023/04/04/opinion/sunday/01Fine/01Fine-blog480.jpg"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "title of article",
+                  "example": "The Guilt of Putting Down Your Pet"
+                },
+                "text": {
+                  "type": "string",
+                  "description": "text of article",
+                  "example": "Readers describe the decisions at the end of their pet’s lives..."
+                },
+                "date": {
+                  "type": "string",
+                  "description": "date of article",
+                  "example": "2023-04-16T16:22:34+0000"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "link of article",
+                  "example": "https://www.nytimes.com/2023/04/16/opinion/letters/pets-euthanasia.html"
+                }
+              }
+            }
+          }        
+        }
+
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
       }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    }
+    }  
   }
-}}
+}
