@@ -1,16 +1,25 @@
-const Pet = require("../../models/pet");
+const { CustomError } = require("../../helpers");
+const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
+const User = require("../../models/user");
 
-const addFavorite = async (req, res) => {
+const addFavorite =  catchAsyncWrapper(async (req, res) => {
+  const user = req.user;
   const { petId } = req.params;
-  console.log('req.params', req.params)
-
-  const result = await Pet.findByIdAndUpdate(
-    petId,
-    //* add the code for adding the user ID to the array of favorites,
+ 
+  if(user.favorite.includes(petId)){
+    throw new CustomError(404, "Not found");
+   // res.status(404).send({message: "Not found"});
+ }
+  
+  const result = await User.findByIdAndUpdate(
+    user._id,
+    {
+      $push: { favorite:  petId  },
+    },
     { new: true }
   );
 
-  res.status(200).json(result);
-};
+  res.status(201).json(result);
+});
 
 module.exports = addFavorite;

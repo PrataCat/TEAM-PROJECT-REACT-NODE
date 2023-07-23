@@ -11,11 +11,11 @@ const petSchema = Schema(
       type: String,
       required: [true, "Set name for contact"],
     },
-    favorite: {
-      type: Array,
-      default: [],
-      required: true,
-    },
+    // favorite: {
+    //   type: Array,
+    //   default: [],
+    //   required: true,
+    // },
     title: {
       type: String,
       default: "This is my lovely pet",
