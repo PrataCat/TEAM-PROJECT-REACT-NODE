@@ -10,12 +10,7 @@ const {
   removeFavorite,
 } = require("../../controllers/pets");
 
-const {
-  validateById,
-  authenticate,
-  validateFavorite,
-  upload,
-} = require("../../middlewares");
+const { validateById, authenticate, upload } = require("../../middlewares");
 
 const router = express.Router();
 
