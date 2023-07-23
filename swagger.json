@@ -336,6 +336,11 @@
           }
         }
       }
+    },
+    "/:userId/favorite":{
+      "get":{
+        
+      }
     }
   },
   "components": {

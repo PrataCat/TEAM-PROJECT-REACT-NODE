@@ -41,6 +41,16 @@ const userSchema = Schema(
       default: "",
       required: [true, "Verify token is required"],
     },
+    favorite: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "pet",
+        },
+      ],
+      default: [],
+      required: true,
+    },
     pets: {
       type: Schema.Types.ObjectId,
       ref: "pet",
