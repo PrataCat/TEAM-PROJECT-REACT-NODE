@@ -1,5 +1,4 @@
-const { contactValidator } = require("../helpers");
-const CustomError = require("../helpers/CustomError");
+const { contactValidator, httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 //* need to check and change
@@ -9,7 +8,7 @@ const validateBodyFirst = () => {
     const { name, email, phone } = req.body;
 
     if (!name && !email && !phone) {
-      return next(new CustomError(400, "Missing fields"));
+      return next(httpError(400, "Missing fields"));
     }
 
     const { error } = contactValidator(req.body);
@@ -17,7 +16,7 @@ const validateBodyFirst = () => {
     if (error) {
       const field = error.details[0].path[0];
 
-      return next(new CustomError(400, `Missing required '${field}' field`));
+      return next(httpError(400, `Missing required '${field}' field`));
     }
 
     next();

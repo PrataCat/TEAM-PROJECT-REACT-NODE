@@ -1,20 +1,19 @@
-const { CustomError } = require("../../helpers");
+const { httpError } = require("../../helpers");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 
-const addFavorite =  catchAsyncWrapper(async (req, res) => {
+const addFavorite = catchAsyncWrapper(async (req, res) => {
   const user = req.user;
   const { petId } = req.params;
- 
-  if(user.favorite.includes(petId)){
-    throw new CustomError(404, "Not found");
-   // res.status(404).send({message: "Not found"});
- }
-  
+
+  if (user.favorite.includes(petId)) {
+    throw httpError(404, "Not found");
+  }
+
   const result = await User.findByIdAndUpdate(
     user._id,
     {
-      $push: { favorite:  petId  },
+      $push: { favorite: petId },
     },
     { new: true }
   );

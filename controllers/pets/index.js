@@ -1,4 +1,3 @@
-const getById = require("./getById");
 const getSomePets = require("./getSomePets");
 const getFavorites = require("./getFavorites");
 const addPet = require("./addPet");
@@ -10,7 +9,6 @@ const removeAdvert = require("./removeAdvert");
 
 module.exports = {
   getSomePets,
-  getById,
   getFavorites,
   addPet,
   addFavorite,

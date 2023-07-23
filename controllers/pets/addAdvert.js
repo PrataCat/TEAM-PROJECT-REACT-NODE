@@ -1,5 +1,5 @@
+const { httpError } = require("../../helpers");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const { CustomError } = require("../../helpers");
 const { Pet, addSchema, sellSchema } = require("../../models/pet");
 
 const addAdvert = catchAsyncWrapper(async (req, res) => {
@@ -12,7 +12,7 @@ const addAdvert = catchAsyncWrapper(async (req, res) => {
 
   if (error) {
     const errMessage = `missing required "${error.details[0].path[0]}" field`;
-    throw CustomError(400, errMessage);
+    throw httpError(400, errMessage);
   }
 
   const { _id: owner } = req.user;
