@@ -1,12 +1,15 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const Pet = require("../../models/pet");
-
-//* need to check
+const { CustomError } = require("../../helpers");
+const { Pet } = require("../../models/pet");
 
 const removePet = catchAsyncWrapper(async (req, res) => {
-  const { contactId } = req.params;
+  const { petId } = req.params;
 
-  await Pet.findByIdAndDelete(contactId);
+  const result = await Pet.findByIdAndRemove(petId);
+
+  if (!result) {
+    throw CustomError(404, "Not found");
+  }
 
   res.json({ message: "Pet deleted" });
 });

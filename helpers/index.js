@@ -7,6 +7,7 @@ const {
 const handleMongooseError = require("./handleMongooseError");
 const sendEmail = require("./sendEmail");
 const emailValidator = require("./emailValidator");
+const CustomError = require("./CustomError");
 
 module.exports = {
   petValidator,
@@ -16,4 +17,5 @@ module.exports = {
   handleMongooseError,
   sendEmail,
   emailValidator,
+  CustomError,
 };
