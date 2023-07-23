@@ -5,8 +5,6 @@ const router = express.Router();
 const {
   addAdvert,
   removeAdvert,
-  addPet,
-  removePet,
   getFavorites,
   addFavorite,
   removeFavorite,
@@ -15,10 +13,8 @@ const {
 const { validateById, authenticate, upload } = require("../../middlewares");
 
 router.post("/advert", addAdvert);
-router.post("/pet", addPet);
 
 router.delete("/advert/:petId", validateById, removeAdvert);
-router.delete("/pet/:petId", validateById, removePet);
 
 router.patch(
   "/photo",
@@ -40,3 +36,5 @@ router.patch(
   //  validateFavorite,
   removeFavorite
 );
+
+module.exports = router;
