@@ -7,6 +7,7 @@ const {
 const handleMongooseError = require("./handleMongooseError");
 const sendEmail = require("./sendEmail");
 const httpError = require("./httpError");
+const catchAsyncWrapper = require("./catchAsyncWrapper");
 
 module.exports = {
   petValidator,
@@ -16,4 +17,5 @@ module.exports = {
   handleMongooseError,
   sendEmail,
   httpError,
+  catchAsyncWrapper,
 };
