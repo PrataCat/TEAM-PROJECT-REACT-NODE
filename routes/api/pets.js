@@ -3,8 +3,6 @@ const express = require("express");
 const {
   addAdvert,
   removeAdvert,
-  getSomePets,
-  getById,
   addPet,
   removePet,
   getFavorites,
@@ -14,7 +12,6 @@ const {
 
 const {
   validateById,
-  validateBody,
   authenticate,
   validateFavorite,
   upload,
@@ -36,8 +33,6 @@ router.patch(
   authenticate,
   upload.single("petPhoto") // контролер для оновлення фото тварини
 );
-router.patch("/:petId/addfavorite", validateFavorite(), addFavorite);
-router.patch("/:petId/removefavorite", validateFavorite(), removeFavorite);
 
 router.get("/:userId/favorite", getFavorites);
 
