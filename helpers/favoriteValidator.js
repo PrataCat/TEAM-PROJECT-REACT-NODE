@@ -1,13 +1,17 @@
-const Joi = require("joi");
+// const Joi = require("joi");
 
-//* need to change
+// //* need to change
 
-const favoriteValidator = (data) => {
-  const schema = Joi.object({
-    favorite: Joi.boolean().required(),
-  });
+// const favoriteValidator = (data) => {
+//   const schema = Joi.object({
+//     favorite: Joi.boolean().required(),
+//   });
 
-  return schema.validate(data);
-};
+//   return schema.validate(data);
+// };
 
-module.exports = favoriteValidator;
+// module.exports = favoriteValidator;
+
+// 
+
+// Таня - не потрібно

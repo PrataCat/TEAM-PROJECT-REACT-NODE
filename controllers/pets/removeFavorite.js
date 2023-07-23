@@ -1,15 +1,24 @@
-const Pet = require("../../models/pet");
+// const Pet = require("../../models/pet");
+const CustomError = require("../../helpers/CustomError");
+const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
+const User = require("../../models/user");
 
-const removeFavorite = async (req, res) => {
-  const { petId } = req.params;
+const removeFavorite =  catchAsyncWrapper(async (req, res) => {
+  const user = req.user;
+   const pet = req.pet;
+  // const {petId}=req.params;
+console.log('pet', pet)
+if(!user.favorite.includes(pet._id)){
+   throw new CustomError(404, "Not found");
+  // res.status(404).send({message: "Not found"});
+}
 
-  const result = await Pet.findByIdAndUpdate(
-    petId,
-    //* add the code for deleting the user ID from the array of favorites,
-    { new: true }
-  );
-
-  res.status(200).json(result);
-};
+   await User.findByIdAndUpdate(user._id, {
+    $pull: { favorite: pet._id },
+  });
+  res.status(204).json({
+    message: "Pet delete success"
+  });
+});
 
 module.exports = removeFavorite;

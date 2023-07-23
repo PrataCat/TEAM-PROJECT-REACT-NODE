@@ -7,6 +7,7 @@ const {
   getById,
   addPet,
   removePet,
+  getFavorites,
   addFavorite,
   removeFavorite,
 } = require("../../controllers/pets");
@@ -29,7 +30,19 @@ router.post("/pet", addPet);
 router.delete("/advert/:petId", validateById, removeAdvert);
 router.delete("/pet/:petId", validateById, removePet);
 
-router.patch("/:petId/addfavorite", validateFavorite(), addFavorite);
-router.patch("/:petId/removefavorite", validateFavorite(), removeFavorite);
+router.get("/:userId/favorite", getFavorites);
+
+router.patch(
+  "/:petId/addfavorite",
+  validateById,
+  // validateFavorite,
+  addFavorite
+);
+router.patch(
+  "/:petId/removefavorite",
+  validateById,
+  //  validateFavorite,
+  removeFavorite
+);
 
 module.exports = router;
