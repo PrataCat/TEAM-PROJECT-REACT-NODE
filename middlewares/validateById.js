@@ -1,10 +1,8 @@
 const { Types } = require("mongoose");
 
 const CustomError = require("../helpers/CustomError");
-const Pet = require("../models/pet");
+const { Pet } = require("../models/pet");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-
-//* need to check and change
 
 const validateById = catchAsyncWrapper(async (req, res, next) => {
   const { petId } = req.params;

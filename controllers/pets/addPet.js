@@ -1,10 +1,16 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const Pet = require("../../models/pet");
+const { CustomError } = require("../../helpers");
+const { Pet, addSchema } = require("../../models/pet");
 
-//* need to check and change
 const addPet = catchAsyncWrapper(async (req, res) => {
-  const { _id: owner } = req.user;
+  const { error } = addSchema.validate(req.body);
 
+  if (error) {
+    const errMessage = `missing required "${error.details[0].path[0]}" field`;
+    throw CustomError(400, errMessage);
+  }
+
+  const { _id: owner } = req.user;
   const result = await Pet.create({ ...req.body, owner });
 
   res.status(201).json(result);
