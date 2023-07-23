@@ -25,8 +25,8 @@ const swaggerDocument = require("../../swagger.json");
 
 const router = express.Router();
 
-router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+router.use("/api-docs", swaggerUi.serve);
+router.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
 router.post("/register", validateRegister(), register);
 router.get("/verify/:verificationToken", verifyEmail);
@@ -41,10 +41,5 @@ router.patch(
   updateUserAvatar
 );
 router.patch("/update", authenticate, validateUpdateUser(), updateUser);
-router.patch(
-  "/photo",
-  authenticate,
-  upload.single("petPhoto") // контролер для оновлення фото тварини
-);
 
 module.exports = router;

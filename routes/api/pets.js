@@ -17,6 +17,7 @@ const {
   validateBody,
   authenticate,
   validateFavorite,
+  upload,
 } = require("../../middlewares");
 
 const router = express.Router();
@@ -29,6 +30,14 @@ router.post("/pet", addPet);
 
 router.delete("/advert/:petId", validateById, removeAdvert);
 router.delete("/pet/:petId", validateById, removePet);
+
+router.patch(
+  "/photo",
+  authenticate,
+  upload.single("petPhoto") // контролер для оновлення фото тварини
+);
+router.patch("/:petId/addfavorite", validateFavorite(), addFavorite);
+router.patch("/:petId/removefavorite", validateFavorite(), removeFavorite);
 
 router.get("/:userId/favorite", getFavorites);
 

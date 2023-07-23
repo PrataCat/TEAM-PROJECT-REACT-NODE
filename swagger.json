@@ -15,6 +15,10 @@
       "description": "Authorization endpoints"
     },
     {
+      "name": "User",
+      "description": "User endpoints"
+    },
+    {
       "name": "Pets",
       "description": "Pets endpoints"
     },
@@ -25,12 +29,11 @@
   ],
 
   "paths": {
-    "/auth/register": {
+    "/api/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -44,7 +47,7 @@
         },
         "responses": {
           "201": {
-            "description": "Successful operation",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -54,17 +57,237 @@
             }
           },
           "400": {
-            "description": "Bad request (invalid request body) ",
+            "description": "Bad request (invalid request body)",
             "content": {}
           },
-          "404": {
-            "description": "Provided email already exists",
+          "409": {
+            "description": "Email in use",
             "content": {}
           }
         }
       }
     },
-    "/news": {
+    "/api/users/verify/:verificationToken": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "User email verification",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "name": "verificationToken",
+            "type": "string",
+            "description": "The verification token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailVereficationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/verify": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Resent verify email",
+        "parameters": [],
+        "requestBody": {
+          "description": "Email's verefication object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResentEmailVereficationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResentEmailVereficationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password is wrong  or  Email not verified",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "500": {
+            "description": "jwt expired",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/current": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Current User information",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "500": {
+            "description": "jwt expired",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/avatars": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user's avatar",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvatarResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing 'avatar' field",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/update": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user's information",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's information (You can update any field you need)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInfoRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "api/news/": {
       "get": {
         "tags": ["News"],
         "summary": "Get news articles",
@@ -120,10 +343,88 @@
       }
     }
   },
-
   "components": {
     "schemas": {
       "RegistrationRequest": {
+        "type": "object",
+        "required": ["name", "email", "password", "confirmPassword"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Alex"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Alex"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "$2b$10$sNqpv6Y4fkclZYoFyAJtnOXP80QOsOs3HQGsWx0WeMI2JsPPSvL02"
+          },
+          "message": {
+            "type": "string",
+            "example": "Your registration is success"
+          }
+        }
+      },
+      "EmailVereficationResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Verification successful"
+          }
+        }
+      },
+      "ResentEmailVereficationRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        }
+      },
+      "ResentEmailVereficationResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Verification email sent"
+          }
+        }
+      },
+      "LoginRequest": {
         "type": "object",
         "required": ["email", "password"],
         "properties": {
@@ -139,18 +440,102 @@
           }
         }
       },
-      "RegistrationResponse": {
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "JWT"
+          }
+        }
+      },
+      "CurrentResponse": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
             "description": "User's email",
             "format": "email"
+          }
+        }
+      },
+      "AvatarRequest": {
+        "content": {
+          "image/png": {
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "AvatarResponse": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "Avatar name"
+          }
+        }
+      },
+      "UserInfoRequest": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Petro"
           },
-          "userId": {
-            "type": "integer",
-            "description": "User's id",
-            "example": "4546578697978888"
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone",
+            "example": "+380500000000"
+          },
+          "birthday": {
+            "type": "date",
+            "description": "User's birthday",
+            "example": "01.07.2000"
+          },
+          "city": {
+            "type": "string",
+            "description": "User's city",
+            "example": "Kyiv"
+          }
+        }
+      },
+      "UserInfoResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "New user's name",
+            "example": "Petro"
+          },
+          "email": {
+            "type": "string",
+            "description": "New user's email",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string",
+            "description": "New user's phone",
+            "example": "+380500000000"
+          },
+          "birthday": {
+            "type": "date",
+            "description": "New user's birthday",
+            "example": "01.07.2000"
+          },
+          "city": {
+            "type": "string",
+            "description": "New user's city",
+            "example": "Kyiv"
           }
         }
       },
@@ -208,17 +593,16 @@
                 }
               }
             }
-          }        
-        }
-
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
+          }
+        },
+        "securitySchemes": {
+          "Bearer": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+          }
         }
       }
-    }  
+    }
   }
 }
