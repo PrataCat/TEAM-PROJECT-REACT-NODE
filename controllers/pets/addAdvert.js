@@ -1,6 +1,6 @@
 const { httpError } = require("../../helpers");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const { Pet, addSchema, sellSchema } = require("../../models/pet");
+const { Pet, addSchema, sellSchema } = require("../../models/notice");
 
 const addAdvert = catchAsyncWrapper(async (req, res) => {
   const category = req.body.category;

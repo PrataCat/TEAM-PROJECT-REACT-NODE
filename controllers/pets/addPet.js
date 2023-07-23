@@ -1,6 +1,6 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const httpError = require("../../helpers/httpError");
-const { Pet, addSchema } = require("../../models/pet");
+const { Pet, addSchema } = require("../../models/notice");
 
 const addPet = catchAsyncWrapper(async (req, res) => {
   const { error } = addSchema.validate(req.body);

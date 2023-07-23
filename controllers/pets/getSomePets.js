@@ -1,5 +1,5 @@
 const { favoriteValidator, httpError } = require("../../helpers");
-const Pet = require("../../models/pet");
+const Pet = require("../../models/notice");
 
 //* need to check and change
 

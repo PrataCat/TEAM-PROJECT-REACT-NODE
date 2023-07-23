@@ -1,6 +1,6 @@
 const { Types } = require("mongoose");
 
-const { Pet } = require("../models/pet");
+const { Pet } = require("../models/notice");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 const { httpError } = require("../helpers");
 

@@ -3,7 +3,7 @@ const handleMongooseError = require("../helpers/handleMongooseError");
 
 const Joi = require("joi");
 
-const petSchema = Schema(
+const noticeSchema = Schema(
   {
     name: {
       type: String,
@@ -15,7 +15,8 @@ const petSchema = Schema(
     },
     category: {
       type: String,
-      default: "my-pet",
+      enum: ["sell", "lost-found", "for-free"],
+      default: "sell",
       required: true,
     },
     date: {
@@ -42,6 +43,10 @@ const petSchema = Schema(
       type: String,
       default: "Kyiv",
     },
+    price: {
+      type: Number,
+      default: 0,
+    },
     comments: {
       type: String,
     },
@@ -57,7 +62,7 @@ const petSchema = Schema(
   }
 );
 
-petSchema.post("save", handleMongooseError);
+noticeSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
@@ -82,6 +87,6 @@ const sellSchema = Joi.object({
   comments: Joi.string().max(120),
 });
 
-const Pet = model("pet", petSchema);
+const Notice = model("notice", noticeSchema);
 
-module.exports = { Pet, addSchema, sellSchema };
+module.exports = { Notice, addSchema, sellSchema };
