@@ -23,18 +23,10 @@ const errorMessageList = {
   504: "Gateway Timeout",
 };
 
-// const customError = (status, message = errorMessageList[status]) => {
-//   const error = new Error(message);
-//   error.status = status;
-//   return error;
-// };
+const httpError = (status, message = errorMessageList[status]) => {
+  const error = new Error(message);
+  error.status = status;
+  return error;
+};
 
-// module.exports = customError;
-class CustomError extends Error {
-  constructor(status, message = errorMessageList[status]) {
-    super(message);
-    this.status = status;
-  }
-}
-
-module.exports = CustomError;
+module.exports = httpError;

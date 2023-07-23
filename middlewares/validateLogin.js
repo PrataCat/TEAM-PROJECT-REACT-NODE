@@ -1,7 +1,6 @@
-const { userLoginValidator } = require("../helpers");
+const { userLoginValidator, httpError } = require("../helpers");
 const { comparePass } = require("../helpers/hashPass");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-const CustomError = require("../helpers/CustomError");
 
 const User = require("../models/user");
 
@@ -14,26 +13,26 @@ const validateLogin = () => {
     if (error) {
       const err = error.details[0].path[0];
 
-      next(new CustomError(400, `Missing field ${err}`));
+      next(httpError(400, `Missing field ${err}`));
       return;
     }
 
     const user = await User.findOne({ email });
 
     if (!user) {
-      next(new CustomError(401, "Email or password is wrong"));
+      next(httpError(401, "Email or password is wrong"));
       return;
     }
 
     if (!user.verify) {
-      next(new CustomError(401, "Email not verified"));
+      next(httpError(401, "Email not verified"));
       return;
     }
 
     const result = await comparePass(password, user.password);
 
     if (!result) {
-      next(new CustomError(401, "Email or password is wrong"));
+      next(httpError(401, "Email or password is wrong"));
       return;
     }
 

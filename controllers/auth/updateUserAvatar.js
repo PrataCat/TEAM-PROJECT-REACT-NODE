@@ -1,10 +1,10 @@
+const { httpError } = require("../../helpers");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const CustomError = require("../../helpers/CustomError");
 const User = require("../../models/user");
 
 const updateUserAvatar = catchAsyncWrapper(async (req, res, next) => {
   if (!req.file) {
-    return next(new CustomError(400, "Missing 'avatar' field"));
+    return next(httpError(400, "Missing 'avatar' field"));
   }
 
   const { _id } = req.user;

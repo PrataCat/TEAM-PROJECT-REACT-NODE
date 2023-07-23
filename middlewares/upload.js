@@ -1,7 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
-const CustomError = require("../helpers/CustomError");
+const { httpError } = require("../helpers");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -33,7 +33,7 @@ const storage = new CloudinaryStorage({
         ],
       };
     } catch {
-      return new CustomError(400, "Error saving photo");
+      return httpError(400, "Error saving photo");
     }
   },
 });

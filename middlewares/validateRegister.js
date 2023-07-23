@@ -1,6 +1,5 @@
-const { userRegisterValidator } = require("../helpers");
+const { userRegisterValidator, httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-const CustomError = require("../helpers/CustomError");
 
 const User = require("../models/user");
 
@@ -10,24 +9,24 @@ const validateRegister = () => {
     const { error, value } = userRegisterValidator(req.body);
 
     if (!name && !email && !password && !confirmPassword) {
-      return next(new CustomError(400, "Missing fields"));
+      return next(httpError(400, "Missing fields"));
     }
 
     if (error) {
       const err = error.details[0].path[0];
-      return next(new CustomError(400, `${err} is not valid`));
+      return next(httpError(400, `${err} is not valid`));
     }
 
     if (password !== confirmPassword) {
       return next(
-        new CustomError(400, "password do not match with confirm password")
+        httpError(400, "password do not match with confirm password")
       );
     }
 
     const user = await User.exists({ email: value.email });
 
     if (user) {
-      return next(new CustomError(409, "Email in use"));
+      return next(httpError(409, "Email in use"));
     }
 
     next();

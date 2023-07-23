@@ -1,5 +1,4 @@
-const { favoriteValidator } = require("../../helpers");
-const CustomError = require("../../helpers/CustomError");
+const { favoriteValidator, httpError } = require("../../helpers");
 const Pet = require("../../models/pet");
 
 //* need to check and change
@@ -16,7 +15,7 @@ const getSomePets = async (req, res, next) => {
     console.log(error);
 
     if (error) {
-      return next(new CustomError(400, "Bad request"));
+      return next(httpError(400, "Bad request"));
     }
 
     currentOwner.favorite = favorite;

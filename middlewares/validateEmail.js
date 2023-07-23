@@ -1,5 +1,4 @@
-const { emailValidator } = require("../helpers");
-const CustomError = require("../helpers/CustomError");
+const { emailValidator, httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 const User = require("../models/user");
 
@@ -13,19 +12,19 @@ const validateEmail = () => {
     if (error) {
       const err = error.details[0].path[0];
 
-      return next(new CustomError(400, `${err} is unvalid`));
+      return next(httpError(400, `${err} is unvalid`));
     }
 
     if (!user) {
-      return next(new CustomError(404, "User not found"));
+      return next(httpError(404, "User not found"));
     }
 
     if (!email) {
-      return next(new CustomError(400, "missing required field email"));
+      return next(httpError(400, "missing required field email"));
     }
 
     if (user.verify) {
-      return next(new CustomError(400, "Verification has already been passed"));
+      return next(httpError(400, "Verification has already been passed"));
     }
 
     next();

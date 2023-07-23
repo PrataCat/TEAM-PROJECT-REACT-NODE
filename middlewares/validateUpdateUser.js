@@ -1,4 +1,4 @@
-const CustomError = require("../helpers/CustomError");
+const { httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 const { updateUserValidator } = require("../helpers/userValidator");
 
@@ -9,13 +9,13 @@ const validateUpdateUser = () => {
     const { error } = updateUserValidator(req.body);
 
     if (!name && !email && !password && !phone && !birthday && !city) {
-      return next(new CustomError(400, "Missing fields"));
+      return next(httpError(400, "Missing fields"));
     }
 
     if (error) {
       const err = error.details[0].path[0];
 
-      return next(new CustomError(400, `${err} is invalid`));
+      return next(httpError(400, `${err} is invalid`));
     }
 
     next();

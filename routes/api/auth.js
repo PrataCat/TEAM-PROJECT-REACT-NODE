@@ -15,10 +15,12 @@ const {
   validateRegister,
   validateLogin,
   authenticate,
-  validateEmail,
   upload,
   validateUpdateUser,
+  validateBody,
 } = require("../../middlewares");
+
+const { emailValidator } = require("../../schemas");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../../swagger.json");
@@ -30,7 +32,7 @@ router.get("/api-docs", swaggerUi.setup(swaggerDocument));
 
 router.post("/register", validateRegister(), register);
 router.get("/verify/:verificationToken", verifyEmail);
-router.post("/verify", validateEmail(), resendVerifyEmail);
+router.post("/verify", validateBody(emailValidator), resendVerifyEmail);
 router.post("/login", validateLogin(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrentUser);
