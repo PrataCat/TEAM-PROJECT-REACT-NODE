@@ -45,7 +45,8 @@ const userSchema = Schema(
       type: [
         {
           type: Schema.Types.ObjectId,
-          ref: "pet",
+          ref: "notice",
+          // ref: "pet",
         },
       ],
       default: [],
