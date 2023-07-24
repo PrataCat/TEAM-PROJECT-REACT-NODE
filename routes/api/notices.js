@@ -62,7 +62,7 @@ router.get("/favorite", authenticate, getFavorites);
 
 router.patch("/favorite/:noticeId", validateNoticeById, removeFromFavorites);
 
-router.get("get/notices/user", getUserNotices);
+router.get("/user",authenticate, getUserNotices);
 
 router.delete("/:noticeId", validateNoticeById, authenticate, removeNotice);
 
