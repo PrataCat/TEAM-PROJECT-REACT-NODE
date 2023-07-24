@@ -3,7 +3,7 @@ const { Types } = require("mongoose");
 const Pet = require("../models/pet");
 const { catchAsyncWrapper, httpError } = require("../helpers");
 
-const validateById = catchAsyncWrapper(async (req, res, next) => {
+const validatePetById = catchAsyncWrapper(async (req, res, next) => {
   const { petId } = req.params;
 
   const idIsValid = Types.ObjectId.isValid(petId);
@@ -21,4 +21,4 @@ const validateById = catchAsyncWrapper(async (req, res, next) => {
   next();
 });
 
-module.exports = validateById;
+module.exports = validatePetById;

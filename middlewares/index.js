@@ -1,4 +1,5 @@
-const validateById = require("./validateById");
+const validatePetById = require("./validatePetById");
+const validateNoticeById = require("./validateNoticeById");
 const validateBody = require("./validateBody");
 const validateFavorite = require("./validateFavorite");
 const validateRegister = require("./validateRegister");
@@ -9,7 +10,7 @@ const upload = require("./upload");
 const validateUpdateUser = require("./validateUpdateUser");
 
 module.exports = {
-  validateById,
+  validatePetById,
   validateBody,
   validateFavorite,
   validateRegister,
@@ -18,4 +19,5 @@ module.exports = {
   validateEmail,
   upload,
   validateUpdateUser,
+  validateNoticeById,
 };
