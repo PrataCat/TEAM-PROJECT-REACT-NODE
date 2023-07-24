@@ -13,42 +13,9 @@ const {
 
 const router = express.Router();
 
-// const {
-//   addAdvert,
-//   removeAdvert,
-//   getFavorites,
-//   addFavorite,
-//   removeFavorite,
-// } = require("../../controllers/pets");
 
-const {
-  validateId, authenticate,
- 
-  //  upload/
-} = require("../../middlewares");
+const { validateId, authenticate } = require("../../middlewares");
 
-// router.post("/advert", addAdvert);
-
-// router.delete("/advert/:petId", validateById, removeAdvert);
-
-// router.patch(
-//   "/photo",
-//   authenticate,
-//   upload.single("petPhoto") // контролер для оновлення фото тварини
-// );
-
-// router.patch(
-//   "/:petId/addfavorite",
-//   validateById,
-//   // validateFavorite,
-//   addFavorite
-// );
-// router.patch(
-//   "/:petId/removefavorite",
-//   validateById,
-//   //  validateFavorite,
-//   removeFavorite
-// );
 
 router.get("/", getNotices);
 

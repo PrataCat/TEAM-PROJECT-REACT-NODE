@@ -10,6 +10,7 @@ const {
   verifyEmail,
   resendVerifyEmail,
 } = require("../../controllers/auth");
+const getMemberData = require("../../controllers/getMemberData");
 
 const {
   validateRegister,
@@ -43,5 +44,6 @@ router.patch(
   updateUserAvatar
 );
 router.patch("/update", authenticate, validateUpdateUser(), updateUser);
+router.get("/pets", authenticate, getMemberData);
 
 module.exports = router;
