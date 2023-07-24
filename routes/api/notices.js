@@ -22,8 +22,8 @@ const router = express.Router();
 // } = require("../../controllers/pets");
 
 const {
-  validateNoticeById,
-  authenticate,
+  validateId, authenticate,
+ 
   //  upload/
 } = require("../../middlewares");
 
@@ -52,18 +52,23 @@ const {
 
 router.get("/", getNotices);
 
-router.get("/:noticeId", validateNoticeById, getNoticeById);
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
-router.post("/", authenticate, addNotice);
+ router.post("/", authenticate, addNotice);
 
-router.patch("/:noticeId/favorite", validateNoticeById, addToFavorites);
+router.patch(
+  "/:noticeId/favorite",
+  authenticate,
+  validateId("noticeId"),
+  addToFavorites
+  );
+  
+ router.get("/favorite", authenticate, getFavorites);
 
-router.get("/favorite", authenticate, getFavorites);
+router.patch("/favorite/:noticeId", validateId("noticeId"),authenticate, removeFromFavorites);
 
-router.patch("/favorite/:noticeId", validateNoticeById, removeFromFavorites);
+router.get("/user", getUserNotices);
 
-router.get("get/notices/user", getUserNotices);
-
-router.delete("/:noticeId", validateNoticeById, authenticate, removeNotice);
+router.delete("/:noticeId", validateId("noticeId"), authenticate, removeNotice);
 
 module.exports = router;

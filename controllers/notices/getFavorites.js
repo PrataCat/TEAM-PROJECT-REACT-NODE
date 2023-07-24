@@ -4,10 +4,10 @@ const User = require("../../models/user");
 
 const getFavorites = catchAsyncWrapper(async (req, res) => {
   const { _id } = req.user;
-  
+
   const user = await User.find(_id).populate("favorite");
 
-  res.status(200).json(user[0].favorite);
+  res.json(user[0].favorite);
 });
 
 module.exports = getFavorites;

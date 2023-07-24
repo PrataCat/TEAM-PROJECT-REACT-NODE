@@ -18,7 +18,7 @@ const addToFavorite = catchAsyncWrapper(async (req, res) => {
     { new: true }
   );
 
-  res.status(201).json(result);
+  res.status(201).json(result.favorite);
 });
 
 module.exports = addToFavorite;
