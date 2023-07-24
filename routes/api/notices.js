@@ -21,11 +21,11 @@ const router = express.Router();
 //   removeFavorite,
 // } = require("../../controllers/pets");
 
-const {
+ const { 
   // validateById,
-  authenticate,
-  //  upload/
-} = require("../../middlewares");
+   authenticate,
+    // upload 
+  } = require("../../middlewares");
 
 // router.post("/advert", addAdvert);
 
@@ -58,7 +58,7 @@ router.post("/", authenticate, addNotice);
 
 router.patch("/:noticeId/favorite", addToFavorites);
 
-router.get("/favorite", getFavorites);
+router.get("/favorite",authenticate, getFavorites);
 
 router.patch("/favorite/:noticeId", removeFromFavorites);
 
