@@ -4,7 +4,7 @@ const { addPet, removePet } = require("../../controllers/pets");
 
 const {
   validateBody,
-  validatePetById,
+  validateId,
   authenticate,
 } = require("../../middlewares");
 
@@ -16,6 +16,6 @@ router.use("/", authenticate);
 
 router.post("/", validateBody(addSchema), addPet);
 
-router.delete("/:petId", validatePetById, removePet);
+router.delete("/:petId", validateId("petId"), removePet);
 
 module.exports = router;

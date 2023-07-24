@@ -13,57 +13,29 @@ const {
 
 const router = express.Router();
 
-// const {
-//   addAdvert,
-//   removeAdvert,
-//   getFavorites,
-//   addFavorite,
-//   removeFavorite,
-// } = require("../../controllers/pets");
 
-const {
-  validateNoticeById,
-  authenticate,
-  //  upload/
-} = require("../../middlewares");
+const { validateId, authenticate } = require("../../middlewares");
 
-// router.post("/advert", addAdvert);
-
-// router.delete("/advert/:petId", validateById, removeAdvert);
-
-// router.patch(
-//   "/photo",
-//   authenticate,
-//   upload.single("petPhoto") // контролер для оновлення фото тварини
-// );
-
-// router.patch(
-//   "/:petId/addfavorite",
-//   validateById,
-//   // validateFavorite,
-//   addFavorite
-// );
-// router.patch(
-//   "/:petId/removefavorite",
-//   validateById,
-//   //  validateFavorite,
-//   removeFavorite
-// );
 
 router.get("/", getNotices);
 
-router.get("/:noticeId", validateNoticeById, getNoticeById);
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
-router.post("/", authenticate, addNotice);
+ router.post("/", authenticate, addNotice);
 
-router.patch("/:noticeId/favorite", validateNoticeById, addToFavorites);
+router.patch(
+  "/:noticeId/favorite",
+  authenticate,
+  validateId("noticeId"),
+  addToFavorites
+  );
+  
+ router.get("/favorite", authenticate, getFavorites);
 
-router.get("/favorite", authenticate, getFavorites);
+router.patch("/favorite/:noticeId", validateId("noticeId"),authenticate, removeFromFavorites);
 
-router.patch("/favorite/:noticeId", validateNoticeById, removeFromFavorites);
+router.get("/user", getUserNotices);
 
-router.get("/user",authenticate, getUserNotices);
-
-router.delete("/:noticeId", validateNoticeById, authenticate, removeNotice);
+router.delete("/:noticeId", validateId("noticeId"), authenticate, removeNotice);
 
 module.exports = router;
