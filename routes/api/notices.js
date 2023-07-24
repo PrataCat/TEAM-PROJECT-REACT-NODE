@@ -22,7 +22,7 @@ const router = express.Router();
 // } = require("../../controllers/pets");
 
 const {
-  // validateById,
+  validateNoticeById,
   authenticate,
   //  upload/
 } = require("../../middlewares");
@@ -52,18 +52,18 @@ const {
 
 router.get("/", getNotices);
 
-router.get("/:noticeId", getNoticeById);
+router.get("/:noticeId", validateNoticeById, getNoticeById);
 
 router.post("/", authenticate, addNotice);
 
-router.patch("/:noticeId/favorite", addToFavorites);
+router.patch("/:noticeId/favorite", validateNoticeById, addToFavorites);
 
-router.get("/favorite", getFavorites);
+router.get("/favorite", authenticate, getFavorites);
 
-router.patch("/favorite/:noticeId", removeFromFavorites);
+router.patch("/favorite/:noticeId", validateNoticeById, removeFromFavorites);
 
 router.get("get/notices/user", getUserNotices);
 
-router.delete("/:noticeId", authenticate, removeNotice);
+router.delete("/:noticeId", validateNoticeById, authenticate, removeNotice);
 
 module.exports = router;
