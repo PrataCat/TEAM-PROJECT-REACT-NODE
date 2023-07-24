@@ -22,6 +22,12 @@
       "name": "Pets",
       "description": "Pets endpoints"
     },
+
+    {
+      "name": "Notice",
+      "description": "Pets endpoints"
+    },
+
     {
       "name": "News",
       "description": "News endpoint"
@@ -337,9 +343,89 @@
         }
       }
     },
-    "/:userId/favorite":{
-      "get":{
-        
+    "api/notices/favorite": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "All favorite notices",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request( Pet is in favorites)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "api/notices/:noticeId/favorite": {
+      "patch": {
+        "tags": ["Notice"],
+        "summary": "Add notice's favorites",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "type": "string",
+            "description": "Notice's id"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddToFavoritesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pet is in favorites",
+            "content": {}
+          }
+        }
+      }
+    },
+    "api/notices/favorite/:noticeId": {
+      "patch": {
+        "tags": ["Notice"],
+        "summary": "Remove notice from favorites",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "noticeId",
+            "required": true,
+            "type": "string",
+            "description": "Notice's id"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "204": {
+            "description": "Pet delete success",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        }
       }
     }
   },
@@ -594,14 +680,115 @@
               }
             }
           }
-        },
-        "securitySchemes": {
-          "Bearer": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT"
-          }
         }
+      },
+      "FavoriteResponse": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "123345678909876543"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name pet",
+            "example": "cat"
+          },
+          "title": {
+            "type": "string",
+            "example": "This is my lovely pet",
+            "description": "Notice's title"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "my-pet",
+            "required": "true"
+          },
+          "date": {
+            "type": "string",
+            "description": "Notice's date",
+            "example": "01.01.2020",
+            "required": "true"
+          },
+          "type": {
+            " type": "string",
+            "example": "cat",
+            "description": "Set type of pet or some title"
+          },
+          "file": {
+            "type": "string",
+            "description": "Add a pet's photo"
+          },
+          "sex": {
+            "type": "string",
+            "example": "female",
+            "description": "['male', 'female']"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location pet",
+            "example": "Kyiv"
+          },
+          "price": {
+            "type": "string",
+            "description": "price pet",
+            "example": "200"
+          },
+          "owner": {
+            "type": "integer",
+            "description": "Pet's id",
+            "example": "123345678909876543"
+          }
+        },
+        "example": [
+          {
+            "_id": "64bbfec37d2f5e23d3ffa0e8",
+            "name": "rex",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "01.01.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          },
+          {
+            "_id": "64bbff087d2f5e23d3ffa0eb",
+            "name": "baskervili",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "05.06.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          }
+        ]
+      },
+      "AddToFavoritesResponse": {
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "integer",
+            "description": "Notice's id",
+            "example": "454657869797888899007766"
+          }
+        },
+        "example": ["454657869797888899007766", "112233445566778899009988"]
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
