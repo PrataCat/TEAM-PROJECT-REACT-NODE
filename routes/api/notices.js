@@ -54,7 +54,7 @@ router.get("/", getNotices);
 
 router.get("/:noticeId", getNoticeById);
 
-router.post("/", addNotice);
+router.post("/", authenticate, addNotice);
 
 router.patch("/:noticeId/favorite", addToFavorites);
 
@@ -64,6 +64,6 @@ router.patch("/favorite/:noticeId", removeFromFavorites);
 
 router.get("get/notices/user", getUserNotices);
 
-router.delete("/:noticeId", removeNotice);
+router.delete("/:noticeId", authenticate, removeNotice);
 
 module.exports = router;
