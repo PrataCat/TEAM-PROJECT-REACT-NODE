@@ -1,8 +1,7 @@
 const { Types } = require("mongoose");
 
-const { Pet } = require("../models/notice");
-const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-const { httpError } = require("../helpers");
+const Pet = require("../models/pet");
+const { catchAsyncWrapper, httpError } = require("../helpers");
 
 const validateById = catchAsyncWrapper(async (req, res, next) => {
   const { petId } = req.params;

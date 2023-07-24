@@ -1,24 +1,24 @@
-const { httpError } = require("../../helpers");
-const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
-const { Pet, addSchema, sellSchema } = require("../../models/notice");
+// const { catchAsyncWrapper, httpError } = require("../../helpers");
+// const Notice = require("../../models/notice");
+// const { addSchema, sellSchema } = require("../../schemas");
 
-const addAdvert = catchAsyncWrapper(async (req, res) => {
-  const category = req.body.category;
+// const addAdvert = catchAsyncWrapper(async (req, res) => {
+//   const category = req.body.category;
 
-  const { error } =
-    category === "sell"
-      ? sellSchema.validate(req.body)
-      : addSchema.validate(req.body);
+//   const { error } =
+//     category === "sell"
+//       ? sellSchema.validate(req.body)
+//       : addSchema.validate(req.body);
 
-  if (error) {
-    const errMessage = `missing required "${error.details[0].path[0]}" field`;
-    throw httpError(400, errMessage);
-  }
+//   if (error) {
+//     // const errMessage = `missing required "${error.details[0].path[0]}" field`;
+//     throw httpError(400, error.message);
+//   }
 
-  const { _id: owner } = req.user;
-  const result = await Pet.create({ ...req.body, owner });
+//   const { _id: owner } = req.user;
+//   const result = await Notice.create({ ...req.body, owner });
 
-  res.status(201).json(result);
-});
+//   res.status(201).json(result);
+// });
 
-module.exports = addAdvert;
+// module.exports = addAdvert;

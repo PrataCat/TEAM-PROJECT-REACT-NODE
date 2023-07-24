@@ -10,6 +10,6 @@ router.use("/", authenticate);
 
 router.post("/", addPet);
 
-router.delete("/:petId", validateById, removePet);
+router.delete("/:petId", removePet);
 
 module.exports = router;
