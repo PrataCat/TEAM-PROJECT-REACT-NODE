@@ -1,7 +1,8 @@
-const { userRegisterValidator, httpError } = require("../helpers");
+const { httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
 
 const User = require("../models/user");
+const { userRegisterValidator } = require("../schemas");
 
 const validateRegister = () => {
   const func = catchAsyncWrapper(async (req, res, next) => {

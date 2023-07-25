@@ -2,7 +2,7 @@ const { httpError, catchAsyncWrapper } = require("../../helpers");
 
 const User = require("../../models/user");
 
-const removeFromFavorite = catchAsyncWrapper(async (req, res) => {
+const removeFromFavorites = catchAsyncWrapper(async (req, res) => {
   const user = req.user;
 
   const { noticeId } = req.params;
@@ -20,6 +20,6 @@ const removeFromFavorite = catchAsyncWrapper(async (req, res) => {
   });
 });
 
-module.exports = removeFromFavorite;
+module.exports = removeFromFavorites;
 
 // +

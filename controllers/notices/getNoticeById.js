@@ -1,12 +1,12 @@
-const { httpError, catchAsyncWrapper } = require("../../helpers");
+const { catchAsyncWrapper } = require("../../helpers");
 const Notice = require("../../models/notice");
 
 const getNoticeById = catchAsyncWrapper(async (req, res) => {
-    const { noticeId } = req.params;
+  const { noticeId } = req.params;
 
-    const result = await Notice.findById(noticeId);
+  const result = await Notice.findById(noticeId);
 
-    res.status(200).json(result);
+  res.status(200).json(result);
 });
 
 module.exports = getNoticeById;

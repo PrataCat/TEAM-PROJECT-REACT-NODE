@@ -1,6 +1,6 @@
 const { httpError } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-const { updateUserValidator } = require("../helpers/userValidator");
+const { updateUserValidator } = require("../schemas");
 
 const validateUpdateUser = () => {
   const func = catchAsyncWrapper(async (req, res, next) => {

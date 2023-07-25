@@ -2,7 +2,7 @@ const { httpError, catchAsyncWrapper } = require("../../helpers");
 
 const User = require("../../models/user");
 
-const addToFavorite = catchAsyncWrapper(async (req, res) => {
+const addToFavorites = catchAsyncWrapper(async (req, res) => {
   const user = req.user;
   const { noticeId } = req.params;
 
@@ -21,6 +21,6 @@ const addToFavorite = catchAsyncWrapper(async (req, res) => {
   res.status(201).json(result.favorite);
 });
 
-module.exports = addToFavorite;
+module.exports = addToFavorites;
 
 // +

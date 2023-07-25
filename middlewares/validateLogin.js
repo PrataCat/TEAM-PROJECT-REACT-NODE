@@ -1,7 +1,6 @@
-const { userLoginValidator, httpError } = require("../helpers");
-const { comparePass } = require("../helpers/hashPass");
+const { httpError, comparePass } = require("../helpers");
 const catchAsyncWrapper = require("../helpers/catchAsyncWrapper");
-
+const { userLoginValidator } = require("../schemas");
 const User = require("../models/user");
 
 const validateLogin = () => {

@@ -11,7 +11,6 @@ const addNotice = catchAsyncWrapper(async (req, res) => {
       : addSchema.validate(req.body);
 
   if (error) {
-    // const errMessage = `missing required "${error.details[0].path[0]}" field`;
     throw httpError(400, error.message);
   }
 
