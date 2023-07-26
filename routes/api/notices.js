@@ -19,8 +19,6 @@ const { validateId, authenticate } = require("../../middlewares");
 
 router.get("/", getNotices);
 
-router.get("/:noticeId", validateId("noticeId"), getNoticeById);
-
  router.post("/", authenticate, addNotice);
 
 router.patch(
@@ -30,11 +28,13 @@ router.patch(
   addToFavorites
   );
   
- router.get("/favorite", authenticate, getFavorites);
+router.get("/favorite", authenticate, getFavorites);
+ 
+router.get("/user",authenticate, getUserNotices);
+
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
 router.patch("/favorite/:noticeId", validateId("noticeId"),authenticate, removeFromFavorites);
-
-router.get("/user", getUserNotices);
 
 router.delete("/:noticeId", validateId("noticeId"), authenticate, removeNotice);
 
