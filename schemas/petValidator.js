@@ -26,7 +26,7 @@ const sellSchema = Joi.object({
   comments: Joi.string().max(120),
 });
 
-const lostOrInGoodHandsSchema = Joi.object({
+const lostAndInGoodHandsSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
   category: Joi.string().required(),
@@ -38,4 +38,4 @@ const lostOrInGoodHandsSchema = Joi.object({
   comments: Joi.string().max(120),
 });
 
-module.exports = { addSchema, sellSchema, lostOrInGoodHandsSchema };
+module.exports = { addSchema, sellSchema, lostAndInGoodHandsSchema };
