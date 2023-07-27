@@ -6,6 +6,7 @@ const {
   validateBody,
   validateId,
   authenticate,
+  upload,
 } = require("../../middlewares");
 
 const { addSchema } = require("../../schemas");
@@ -14,7 +15,7 @@ const router = express.Router();
 
 router.use("/", authenticate);
 
-router.post("/", validateBody(addSchema), addPet);
+router.post("/", validateBody(addSchema), upload.single("file"), addPet);
 
 router.delete("/:petId", validateId("petId"), removePet);
 
