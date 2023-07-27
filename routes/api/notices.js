@@ -13,26 +13,29 @@ const {
 
 const router = express.Router();
 
-
-const { validateId, authenticate } = require("../../middlewares");
-
+const { validateId, authenticate, upload } = require("../../middlewares");
 
 router.get("/", getNotices);
 
 router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
- router.post("/", authenticate, addNotice);
+router.post("/", authenticate, upload.single("file"), addNotice);
 
 router.patch(
   "/:noticeId/favorite",
   authenticate,
   validateId("noticeId"),
   addToFavorites
-  );
-  
- router.get("/favorite", authenticate, getFavorites);
+);
 
-router.patch("/favorite/:noticeId", validateId("noticeId"),authenticate, removeFromFavorites);
+router.get("/favorite", authenticate, getFavorites);
+
+router.patch(
+  "/favorite/:noticeId",
+  validateId("noticeId"),
+  authenticate,
+  removeFromFavorites
+);
 
 router.get("/user", getUserNotices);
 
