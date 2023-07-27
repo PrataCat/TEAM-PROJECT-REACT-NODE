@@ -26,9 +26,13 @@ router.patch(
   authenticate,
   validateId("noticeId"),
   addToFavorites
-);
-
+  );
+  
 router.get("/favorite", authenticate, getFavorites);
+ 
+router.get("/user",authenticate, getUserNotices);
+
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
 router.patch(
   "/favorite/:noticeId",
@@ -36,8 +40,6 @@ router.patch(
   authenticate,
   removeFromFavorites
 );
-
-router.get("/user", getUserNotices);
 
 router.delete("/:noticeId", validateId("noticeId"), authenticate, removeNotice);
 

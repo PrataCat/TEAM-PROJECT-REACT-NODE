@@ -8,7 +8,7 @@ const addSchema = Joi.object({
   category: Joi.string().required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
-  file: Joi.string().required(),
+  file: Joi.string(),
   location: Joi.string(),
   comments: Joi.string().max(120),
 });
@@ -19,7 +19,7 @@ const sellSchema = Joi.object({
   category: Joi.string().required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
-  file: Joi.string().required(),
+  file: Joi.string(),
   price: Joi.number().required(),
   sex: Joi.string().required(),
   location: Joi.string(),
