@@ -343,6 +343,100 @@
         }
       }
     },
+
+    "api/notices/user": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "All user notices",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserNoticesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/notices": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "Find notices by query or category",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "search notices by keyword in the title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "category",
+            "description": "search in category by keyword",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchNoticesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing field`s",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "api/notices/:noticeId": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "Find notice by id",
+        "parameters": [
+          {
+            "in": "get",
+            "name": "noticeId",
+            "required": true,
+            "type": "string",
+            "description": "Notice's id"
+          }
+        ],
+        "security": [],
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {"application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticesByIdResponse"
+                }
+              }}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          }
+        }
+      }
+    },
     "api/notices/favorite": {
       "get": {
         "tags": ["Notice"],
@@ -682,6 +776,252 @@
           }
         }
       },
+
+      "SearchNoticesResponse": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "123345678909876543"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name pet",
+            "example": "cat"
+          },
+          "title": {
+            "type": "string",
+            "example": "This is my lovely pet",
+            "description": "Notice's title"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "my-pet",
+            "required": "true"
+          },
+          "date": {
+            "type": "string",
+            "description": "Notice's date",
+            "example": "01.01.2020",
+            "required": "true"
+          },
+          "type": {
+            " type": "string",
+            "example": "cat",
+            "description": "Set type of pet or some title"
+          },
+          "file": {
+            "type": "string",
+            "description": "Add a pet's photo"
+          },
+          "sex": {
+            "type": "string",
+            "example": "female",
+            "description": "['male', 'female']"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location pet",
+            "example": "Kyiv"
+          },
+          "price": {
+            "type": "string",
+            "description": "price pet",
+            "example": "200"
+          },
+          "owner": {
+            "type": "integer",
+            "description": "Pet's id",
+            "example": "123345678909876543"
+          }
+        },
+        "example": [
+          {
+            "_id": "64bbfec37d2f5e23d3ffa0e8",
+            "name": "rex",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "01.01.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          },
+          {
+            "_id": "64bbff087d2f5e23d3ffa0eb",
+            "name": "baskervili",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "05.06.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          }
+        ]
+      },
+
+      "NoticesByIdResponse": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "123345678909876543"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name pet",
+            "example": "cat"
+          },
+          "title": {
+            "type": "string",
+            "example": "This is my lovely pet",
+            "description": "Notice's title"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "my-pet",
+            "required": "true"
+          },
+          "date": {
+            "type": "string",
+            "description": "Notice's date",
+            "example": "01.01.2020",
+            "required": "true"
+          },
+          "type": {
+            " type": "string",
+            "example": "cat",
+            "description": "Set type of pet or some title"
+          },
+          "file": {
+            "type": "string",
+            "description": "Add a pet's photo"
+          },
+          "sex": {
+            "type": "string",
+            "example": "female",
+            "description": "['male', 'female']"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location pet",
+            "example": "Kyiv"
+          },
+          "price": {
+            "type": "string",
+            "description": "price pet",
+            "example": "200"
+          },
+          "owner": {
+            "type": "integer",
+            "description": "Pet's id",
+            "example": "123345678909876543"
+          }
+        },
+        "example": [          {
+            "_id": "64bbfec37d2f5e23d3ffa0e8",
+            "name": "rex",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "01.01.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          }]
+      },
+
+      "UserNoticesResponse": {
+        "type": "object",
+        "required": true,
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "123345678909876543"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name pet",
+            "example": "cat"
+          },
+          "title": {
+            "type": "string",
+            "example": "This is my lovely pet",
+            "description": "Notice's title"
+          },
+          "category": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "my-pet",
+            "required": "true"
+          },
+          "date": {
+            "type": "string",
+            "description": "Notice's date",
+            "example": "01.01.2020",
+            "required": "true"
+          },
+          "type": {
+            " type": "string",
+            "example": "cat",
+            "description": "Set type of pet or some title"
+          },
+          "file": {
+            "type": "string",
+            "description": "Add a pet's photo"
+          },
+          "sex": {
+            "type": "string",
+            "example": "female",
+            "description": "['male', 'female']"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location pet",
+            "example": "Kyiv"
+          },
+          "price": {
+            "type": "string",
+            "description": "price pet",
+            "example": "200"
+          },
+          "owner": {
+            "type": "integer",
+            "description": "Pet's id",
+            "example": "123345678909876543"
+          }
+        },
+        "example": [
+          {
+            "_id": "64bbfec37d2f5e23d3ffa0e8",
+            "name": "rex",
+            "title": "This is my lovely pet",
+            "category": "for-free",
+            "date": "01.01.2023",
+            "type": "pitbul",
+            "file": "male",
+            "sex": "male",
+            "location": "Kyiv",
+            "price": "100",
+            "owner": "64bbedd977975050e6f25117"
+          }
+        ]
+      },
+
       "FavoriteResponse": {
         "type": "object",
         "required": true,
