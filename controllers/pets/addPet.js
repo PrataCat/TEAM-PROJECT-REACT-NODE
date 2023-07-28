@@ -5,14 +5,14 @@ const { addSchema } = require("../../schemas");
 
 const addPet = catchAsyncWrapper(async (req, res) => {
   const { error } = addSchema.validate(req.body);
-  const file = req.file.path;
+  // const file = req.file.path;
   const { _id: owner } = req.user;
 
   if (error) {
     throw httpError(400, "Bad request");
   }
 
-  const result = await Pet.create({ ...req.body, owner, file });
+  const result = await Pet.create({ ...req.body, owner });
 
   res.status(201).json(result);
 });

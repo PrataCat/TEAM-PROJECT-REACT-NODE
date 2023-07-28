@@ -4,7 +4,7 @@ const { lostAndInGoodHandsSchema, sellSchema } = require("../../schemas");
 
 const addNotice = catchAsyncWrapper(async (req, res) => {
   const category = req.body.category;
-  const file = req.file.path;
+  // const file = req.file.path;
 
   const { error } =
     category === "sell"
@@ -16,7 +16,7 @@ const addNotice = catchAsyncWrapper(async (req, res) => {
   }
 
   const { _id: owner } = req.user;
-  const result = await Notice.create({ ...req.body, owner, file });
+  const result = await Notice.create({ ...req.body, owner });
 
   res.status(201).json(result);
 });
