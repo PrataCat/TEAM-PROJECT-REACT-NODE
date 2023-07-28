@@ -9,7 +9,7 @@ const addPet = catchAsyncWrapper(async (req, res) => {
   const { _id: owner } = req.user;
 
   if (error) {
-    throw httpError(400, "Bad request");
+    throw httpError(400, error.message);
   }
 
   const result = await Pet.create({ ...req.body, owner, file });
