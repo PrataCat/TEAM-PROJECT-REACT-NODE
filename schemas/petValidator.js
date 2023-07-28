@@ -32,7 +32,7 @@ const lostAndInGoodHandsSchema = Joi.object({
   category: Joi.string().required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
-  file: Joi.string().required(),
+  file: Joi.string(),
   sex: Joi.string().required(),
   location: Joi.string(),
   comments: Joi.string().max(120),
