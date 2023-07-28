@@ -1,13 +1,11 @@
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
-//* need to check and change
-
 const userSchema = Schema(
   {
     name: {
       type: String,
-      required: [true, "Set name for contact"],
+      required: [true, "Set name for user"],
     },
     email: {
       type: String,
@@ -17,6 +15,12 @@ const userSchema = Schema(
     password: {
       type: String,
       required: [true, "Set password for user"],
+    },
+    contactEmail: {
+      type: String,
+      default: function () {
+        return this.email;
+      },
     },
     phone: {
       type: String,
