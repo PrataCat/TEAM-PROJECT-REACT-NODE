@@ -30,7 +30,7 @@ const sellSchema = Joi.object({
 const lostAndInGoodHandsSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().valid("lost-found", "in-good-hands").required(),
+  category: Joi.string().valid("lost-found", "for-free").required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
