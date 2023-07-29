@@ -13,7 +13,9 @@ const noticeSchema = Schema(
     },
     category: {
       type: String,
+
       enum: ["sell", "lost-found", "for-free"],
+    
       default: "sell",
       required: true,
     },

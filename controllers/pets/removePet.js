@@ -3,11 +3,11 @@ const Pet = require("../../models/pet");
 
 const removePet = catchAsyncWrapper(async (req, res) => {
   const { petId } = req.params;
-  
+
   const pet = await Pet.findById(petId);
-  
+
   if (!pet) {
-    throw httpError(400, "Bad request");
+    throw httpError(404, "Not found");
   }
 
   if (pet.owner.toString() !== req.user._id.toString()) {

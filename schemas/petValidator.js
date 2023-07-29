@@ -6,7 +6,7 @@ const addSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string(),
   category: Joi.string().valid("my-pet").required(),
-  date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
+  date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
   location: Joi.string(),
