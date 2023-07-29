@@ -4,11 +4,11 @@ const { updateUserValidator } = require("../schemas");
 
 const validateUpdateUser = () => {
   const func = catchAsyncWrapper(async (req, res, next) => {
-    const { name, email, password, phone, birthday, city } = req.body;
+    const { name, contactEmail, password, phone, birthday, city } = req.body;
 
     const { error } = updateUserValidator(req.body);
 
-    if (!name && !email && !password && !phone && !birthday && !city) {
+    if (!name && !contactEmail && !password && !phone && !birthday && !city) {
       return next(httpError(400, "Missing fields"));
     }
 

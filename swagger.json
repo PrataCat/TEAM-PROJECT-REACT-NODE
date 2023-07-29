@@ -405,57 +405,36 @@
         }
       },
       "post": {
-        "post": {
-          "tags": ["Notice"],
-          "summary": "Notice adding a user's notices",
-          "parameters": [],
-          "security": [{ "Bearer": [] }],
+        "tags": ["Notice"],
+        "summary": "Add notices",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
 
-          "requestBody": {
-            "description": "Adding a user's notices",
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": [
-                  {
-                    "sell": {
-                      "$ref": "#/components/schemas/AddSellNoticeRequest"
-                    },
-                    "lost-found": {
-                      "$ref": "#/components/schemas/AddNoticeRequest"
-                    },
-                    "for-free": {
-                      "$ref": "#/components/schemas/AddNoticeRequest"
-                    }
-                  }
-                ]
+        "requestBody": {
+          "description": "Adding a user's notices",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddSellNoticeRequest"
               }
             }
           }
         },
+
         "responses": {
           "201": {
             "description": "Successful operation",
             "content": {
               "application/json": {
-                "schema": [
-                  {
-                    "sell": {
-                      "$ref": "#/components/schemas/AddSellNoticeResponse"
-                    },
-                    "lost-found": {
-                      "$ref": "#/components/schemas/AddNoticeResponse"
-                    },
-                    "for-free": {
-                      "$ref": "#/components/schemas/AddNoticeResponse"
-                    }
-                  }
-                ]
+                "schema": {
+                  "$ref": "#/components/schemas/AddSellNoticeResponse"
+                }
               }
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "error message",
             "content": {}
           }
         }
@@ -613,8 +592,7 @@
     "/pet": {
       "post": {
         "tags": ["Pet"],
-        "summary": "Pet adding a user's pet",
-
+        "summary": "Add pet",
         "parameters": [],
         "security": [{ "Bearer": [] }],
 
@@ -642,7 +620,7 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "error message",
             "content": {}
           }
         }
@@ -1451,7 +1429,7 @@
           "price": {
             "type": "number",
             "required": true,
-            "description": "price",
+            "description": "the 'price' field should not be used in categories 'lost-found', 'for-free'",
             "example": "155"
           },
           "sex": {

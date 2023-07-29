@@ -12,7 +12,7 @@ const addNotice = catchAsyncWrapper(async (req, res) => {
       : lostAndInGoodHandsSchema.validate(req.body);
 
   if (error) {
-    throw httpError(400, "Bad request");
+    throw httpError(400, error.message);
   }
 
   const { _id: owner } = req.user;

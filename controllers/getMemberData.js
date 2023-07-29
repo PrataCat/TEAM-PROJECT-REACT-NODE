@@ -2,8 +2,17 @@ const { catchAsyncWrapper } = require("../helpers");
 const Pet = require("../models/pet");
 
 const getMemberData = catchAsyncWrapper(async (req, res) => {
-  const { _id, name, email, phone, birthday, city, avatar, favorite } =
-    req.user;
+  const {
+    _id,
+    name,
+    email,
+    contactEmail,
+    phone,
+    birthday,
+    city,
+    avatar,
+    favorite,
+  } = req.user;
 
   const currentUser = {
     owner: _id,
@@ -16,7 +25,17 @@ const getMemberData = catchAsyncWrapper(async (req, res) => {
   });
 
   res.json({
-    user: { _id, name, email, phone, birthday, city, avatar, favorite },
+    user: {
+      _id,
+      name,
+      email,
+      contactEmail,
+      phone,
+      birthday,
+      city,
+      avatar,
+      favorite,
+    },
     pets: result,
   });
 });
