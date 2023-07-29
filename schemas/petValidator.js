@@ -5,7 +5,7 @@ const Joi = JoiBase.extend(JoiDate);
 const addSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string(),
-  category: Joi.string().required(),
+  category: Joi.string().valid("my-pet").required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
@@ -16,7 +16,7 @@ const addSchema = Joi.object({
 const sellSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().required(),
+  category: Joi.string().valid("sell").required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
@@ -26,10 +26,11 @@ const sellSchema = Joi.object({
   comments: Joi.string().max(120),
 });
 
+
 const lostAndInGoodHandsSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().required(),
+  category: Joi.string().valid("lost-found", "in-good-hands").required(),
   date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
