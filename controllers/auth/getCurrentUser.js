@@ -1,9 +1,7 @@
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 
 const getCurrentUser = catchAsyncWrapper(async (req, res) => {
-  const { email } = req.user;
-
-  res.json({ email });
+  res.json(req.user);
 });
 
 module.exports = getCurrentUser;
