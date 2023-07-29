@@ -17,13 +17,12 @@ const login = catchAsyncWrapper(async (req, res, next) => {
   );
 
   const id = user._id;
+
   const token = jwt.sign({ id }, JWT_KEY, { expiresIn: "24h" });
 
-  await User.findByIdAndUpdate(id, { token });
+  await User.findByIdAndUpdate(id, { token }, { new: true });
 
-  res.json({
-    user,
-  });
+  res.json({ user });
 });
 
 module.exports = login;

@@ -56,11 +56,20 @@ const userSchema = Schema(
       default: [],
       required: true,
     },
-    pets: {
-      type: Schema.Types.ObjectId,
-      ref: "pet",
-    },
+    // pets: {
+    //   type: [
+    //     {
+    //       type: Schema.Types.ObjectId,
+    //       ref: "pet",
+    //     },
+    //   ],
+    //   default: [],
+    //   required: true,
+    // },
+
+    pets: [{ type: Schema.Types.ObjectId, ref: "pet", required: true }],
   },
+
   {
     versionKey: false,
     timestamps: true,
