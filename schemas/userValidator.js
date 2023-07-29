@@ -27,7 +27,7 @@ const updateUserValidator = (data) => {
     email: Joi.string().email(),
     contactEmail: Joi.string().email(),
     password: Joi.string().min(6),
-    birthday: Joi.date().utc().format(["DD.MM.YYYY"]),
+    birthday: Joi.date().utc().format(["YYYY-MM-DD"]),
     phone: Joi.string().regex(
       /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
     ),
