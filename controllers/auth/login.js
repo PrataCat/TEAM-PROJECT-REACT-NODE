@@ -13,7 +13,8 @@ const login = catchAsyncWrapper(async (req, res, next) => {
       password: 0,
       createdAt: 0,
       updatedAt: 0,
-    }
+    },
+    { new: true }
   );
 
   const id = user._id;
