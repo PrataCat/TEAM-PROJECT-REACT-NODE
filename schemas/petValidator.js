@@ -16,8 +16,8 @@ const addSchema = Joi.object({
 const sellSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().required(),
-  date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
+  category: Joi.string().valid("sell").required(),
+  date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
   price: Joi.number().required(),
@@ -29,8 +29,8 @@ const sellSchema = Joi.object({
 const lostAndInGoodHandsSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().required(),
-  date: Joi.date().utc().format(["DD.MM.YYYY"]).required(),
+  category: Joi.string().valid("lost-found", "for-free").required(),
+  date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
   sex: Joi.string().required(),
