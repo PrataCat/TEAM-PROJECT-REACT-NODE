@@ -15,7 +15,7 @@ const noticeSchema = Schema(
       type: String,
 
       enum: ["sell", "lost-found", "for-free"],
-    
+
       default: "sell",
       required: true,
     },
@@ -54,6 +54,14 @@ const noticeSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
+    },
+    contactEmail: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
+    phone: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
     },
   },
   {
