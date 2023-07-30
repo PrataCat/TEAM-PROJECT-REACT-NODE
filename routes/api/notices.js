@@ -17,22 +17,22 @@ const { validateId, authenticate, upload } = require("../../middlewares");
 
 router.get("/", getNotices);
 
-router.get("/:noticeId", validateId("noticeId"), getNoticeById);
+router.get("/favorite", authenticate, getFavorites);
+
+router.get("/user", authenticate, getUserNotices);
 
 router.post("/", authenticate, upload.single("file"), addNotice);
+
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
+
+router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
 router.patch(
   "/:noticeId/favorite",
   authenticate,
   validateId("noticeId"),
   addToFavorites
-  );
-  
-router.get("/favorite", authenticate, getFavorites);
- 
-router.get("/user",authenticate, getUserNotices);
-
-router.get("/:noticeId", validateId("noticeId"), getNoticeById);
+);
 
 router.patch(
   "/favorite/:noticeId",
