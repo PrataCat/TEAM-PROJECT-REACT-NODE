@@ -24,6 +24,10 @@ const sellSchema = Joi.object({
   sex: Joi.string().required(),
   location: Joi.string(),
   comments: Joi.string().max(120),
+  phone: Joi.string().regex(
+    /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
+  ),
+  contactEmail: Joi.string().email(),
 });
 
 const lostAndInGoodHandsSchema = Joi.object({
@@ -36,6 +40,10 @@ const lostAndInGoodHandsSchema = Joi.object({
   sex: Joi.string().required(),
   location: Joi.string(),
   comments: Joi.string().max(120),
+  phone: Joi.string().regex(
+    /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
+  ),
+  contactEmail: Joi.string().email(),
 });
 
 module.exports = { addSchema, sellSchema, lostAndInGoodHandsSchema };
