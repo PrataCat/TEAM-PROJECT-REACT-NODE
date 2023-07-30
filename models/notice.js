@@ -55,14 +55,6 @@ const noticeSchema = Schema(
       ref: "user",
       required: true,
     },
-    contactEmail: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
-    phone: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
   },
   {
     versionKey: false,
