@@ -11,6 +11,7 @@ const login = catchAsyncWrapper(async (req, res, next) => {
     { email },
     {
       password: 0,
+      token: 0,
       createdAt: 0,
       updatedAt: 0,
     },
@@ -23,7 +24,7 @@ const login = catchAsyncWrapper(async (req, res, next) => {
 
   await User.findByIdAndUpdate(id, { token }, { new: true });
 
-  res.json({ user });
+  res.json({ user, token });
 });
 
 module.exports = login;
