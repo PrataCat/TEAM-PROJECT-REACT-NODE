@@ -16,9 +16,9 @@ const verifyEmail = catchAsyncWrapper(async (req, res, next) => {
     verificationToken: "",
   });
 
-  res.json({
-    message: "Verification successful",
-  });
+  res.redirect(
+    "https://vladzhyrnyi.github.io/your-pet-front/login?verified=%22true%22"
+  );
 });
 
 module.exports = verifyEmail;
