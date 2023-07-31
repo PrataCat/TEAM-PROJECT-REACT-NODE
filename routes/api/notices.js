@@ -25,8 +25,6 @@ router.post("/", authenticate, upload.single("file"), addNotice);
 
 router.get("/:noticeId", validateId("noticeId"), getNoticeById);
 
-router.get("/:noticeId", validateId("noticeId"), getNoticeById);
-
 router.patch(
   "/:noticeId/favorite",
   authenticate,
