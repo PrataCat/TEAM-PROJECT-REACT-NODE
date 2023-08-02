@@ -43,10 +43,6 @@ const noticeSchema = Schema(
       type: String,
       default: "Kyiv",
     },
-    // price: {
-    //   type: Number,
-    //   default: 0,
-    // },
     price: {
       type: Number,
       required: function () {

@@ -13,23 +13,6 @@ const addSchema = Joi.object({
   comments: Joi.string().max(120),
 });
 
-// const sellSchema = Joi.object({
-//   name: Joi.string().min(2).max(20).required(),
-//   title: Joi.string().required(),
-//   category: Joi.string().valid("sell").required(),
-//   date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
-//   type: Joi.string().required(),
-//   file: Joi.string(),
-//   price: Joi.number().required(),
-//   sex: Joi.string().required(),
-//   location: Joi.string(),
-//   comments: Joi.string().max(120),
-//   phone: Joi.string().regex(
-//     /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
-//   ),
-//   contactEmail: Joi.string().email(),
-// });
-
 const noticeSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
@@ -54,25 +37,7 @@ const noticeSchema = Joi.object({
   contactEmail: Joi.string().email(),
 });
 
-// const lostAndInGoodHandsSchema = Joi.object({
-//   name: Joi.string().min(2).max(20).required(),
-//   title: Joi.string().required(),
-//   category: Joi.string().valid("lost-found", "for-free").required(),
-//   date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
-//   type: Joi.string().required(),
-//   file: Joi.string(),
-//   sex: Joi.string().required(),
-//   location: Joi.string(),
-//   comments: Joi.string().max(120),
-//   phone: Joi.string().regex(
-//     /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
-//   ),
-//   contactEmail: Joi.string().email(),
-// });
-
 module.exports = {
   addSchema,
   noticeSchema,
-  // sellSchema,
-  // lostAndInGoodHandsSchema,
 };
