@@ -7,10 +7,10 @@ const petSchema = Schema(
       type: String,
       required: [true, "Set name for contact"],
     },
-    title: {
-      type: String,
-      default: "This is my lovely pet",
-    },
+    // title: {
+    //   type: String,
+    //   default: "This is my lovely pet",
+    // },
     category: {
       type: String,
       default: "my-pet",
@@ -30,16 +30,16 @@ const petSchema = Schema(
       type: String,
       required: [true, "Add a pet's photo"],
     },
-    sex: {
-      type: String,
-      enum: ["male", "female"],
-      default: "female",
-      required: true,
-    },
-    location: {
-      type: String,
-      default: "Kyiv",
-    },
+    // sex: {
+    //   type: String,
+    //   enum: ["male", "female"],
+    //   default: "female",
+    //   required: true,
+    // },
+    // location: {
+    //   type: String,
+    //   default: "Kyiv",
+    // },
     comments: {
       type: String,
     },
