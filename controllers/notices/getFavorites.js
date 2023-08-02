@@ -4,6 +4,7 @@ const User = require("../../models/user");
 
 const getFavorites = catchAsyncWrapper(async (req, res) => {
   const { _id } = req.user;
+  
   const { page = 1, perPage = 9 } = req.query;
 
   const limit = perPage;
