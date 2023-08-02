@@ -35,7 +35,7 @@
   ],
 
   "paths": {
-    "users/register": {
+    "/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
@@ -676,11 +676,6 @@
             "format": "email"
           },
           "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          },
-          "confirmPassword": {
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
