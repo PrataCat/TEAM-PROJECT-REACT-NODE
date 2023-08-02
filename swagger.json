@@ -73,7 +73,7 @@
         }
       }
     },
-    "users/verify/{verificationToken}": {
+    "/users/verify/{verificationToken}": {
       "get": {
         "tags": ["Auth"],
         "summary": "User email verification",
@@ -100,7 +100,7 @@
         }
       }
     },
-    "users/verify": {
+    "/users/verify": {
       "post": {
         "tags": ["Auth"],
         "summary": "Resent verify email",
@@ -138,7 +138,7 @@
         }
       }
     },
-    "users/login": {
+    "/users/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
@@ -176,7 +176,7 @@
         }
       }
     },
-    "users/logout": {
+    "/users/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
@@ -197,7 +197,7 @@
         }
       }
     },
-    "users/current": {
+    "/users/current": {
       "get": {
         "tags": ["User"],
         "summary": "Current User information",
@@ -225,7 +225,7 @@
         }
       }
     },
-    "users/avatars": {
+    "/users/avatars": {
       "patch": {
         "tags": ["User"],
         "summary": "Update user's avatar",
@@ -259,7 +259,7 @@
         }
       }
     },
-    "users/update": {
+    "/users/update": {
       "patch": {
         "tags": ["User"],
         "summary": "Update user's information",
@@ -293,7 +293,7 @@
         }
       }
     },
-    "news/": {
+    "/news/": {
       "get": {
         "tags": ["News"],
         "summary": "Get news articles",
@@ -344,7 +344,7 @@
       }
     },
 
-    "notices/user": {
+    "/notices/user": {
       "get": {
         "tags": ["Notice"],
         "summary": "All user notices",
@@ -365,7 +365,7 @@
         }
       }
     },
-    "notices": {
+    "/notices": {
       "get": {
         "tags": ["Notice"],
         "summary": "Find notices by query or category",
@@ -441,7 +441,7 @@
       }
     },
 
-    "notices/{noticeId}": {
+    "/notices/{noticeId}": {
       "get": {
         "tags": ["Notice"],
         "summary": "Find notice by id",
@@ -504,7 +504,7 @@
         }
       }
     },
-    "notices/favorite": {
+    "/notices/favorite": {
       "get": {
         "tags": ["Notice"],
         "summary": "All favorite notices",
@@ -529,7 +529,7 @@
         }
       }
     },
-    "notices/{noticeId}/favorite": {
+    "/notices/{noticeId}/favorite": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Add notice's favorites",
@@ -562,7 +562,7 @@
         }
       }
     },
-    "notices/favorite/{noticeId}": {
+    "/notices/favorite/{noticeId}": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Remove notice from favorites",
@@ -626,7 +626,7 @@
         }
       }
     },
-    "pet/{petId}": {
+    "/pet/{petId}": {
       "delete": {
         "tags": ["Pet"],
         "summary": "Delete pet",
