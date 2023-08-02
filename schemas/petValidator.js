@@ -33,7 +33,7 @@ const addSchema = Joi.object({
 const noticeSchema = Joi.object({
   name: Joi.string().min(2).max(20).required(),
   title: Joi.string().required(),
-  category: Joi.string().valid("sell").required(),
+  category: Joi.string().valid("sell", "lost-found", "for-free").required(),
   date: Joi.date().utc().format(["YYYY-MM-DD"]).required(),
   type: Joi.string().required(),
   file: Joi.string(),
