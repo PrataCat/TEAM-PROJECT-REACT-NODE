@@ -1,8 +1,9 @@
 const emailValidator = require("../schemas/emailValidator");
 const {
   addSchema,
-  sellSchema,
-  lostAndInGoodHandsSchema,
+  // sellSchema,
+  noticeSchema,
+  // lostAndInGoodHandsSchema,
 } = require("./petValidator");
 const {
   userRegisterValidator,
@@ -13,8 +14,9 @@ const {
 module.exports = {
   emailValidator,
   addSchema,
-  sellSchema,
-  lostAndInGoodHandsSchema,
+  // sellSchema,
+  noticeSchema,
+  // lostAndInGoodHandsSchema,
   userRegisterValidator,
   userLoginValidator,
   updateUserValidator,

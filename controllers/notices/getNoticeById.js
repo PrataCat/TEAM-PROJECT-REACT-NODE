@@ -6,16 +6,16 @@ const getNoticeById = catchAsyncWrapper(async (req, res) => {
 
   const notice = await Notice.findById(noticeId).populate(
     "owner",
-    "contactEmail"
+    "contactEmail phone"
   );
-
-  const ownerPhone = await Notice.findById(noticeId).populate("owner", "phone");
 
   if (!notice) {
     throw httpError(404, "Not found");
   }
 
-  res.status(200).json({ notice, phone: ownerPhone.owner.phone });
+  res.status(200).json({
+    notice,
+  });
 });
 
 module.exports = getNoticeById;
