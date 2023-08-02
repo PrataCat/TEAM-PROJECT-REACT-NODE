@@ -45,7 +45,9 @@ const noticeSchema = Schema(
     },
     price: {
       type: Number,
-      default: 0,
+      required: function () {
+        return this.category === "sell";
+      },
     },
     comments: {
       type: String,
@@ -54,14 +56,6 @@ const noticeSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
-    },
-    contactEmail: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
-    phone: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
     },
   },
   {

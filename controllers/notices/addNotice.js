@@ -1,15 +1,11 @@
 const { catchAsyncWrapper, httpError } = require("../../helpers");
 const Notice = require("../../models/notice");
-const { lostAndInGoodHandsSchema, sellSchema } = require("../../schemas");
+const { noticeSchema } = require("../../schemas");
 
 const addNotice = catchAsyncWrapper(async (req, res) => {
-  const category = req.body.category;
   const file = req.file.path;
 
-  const { error } =
-    category === "sell"
-      ? sellSchema.validate(req.body)
-      : lostAndInGoodHandsSchema.validate(req.body);
+  const { error } = noticeSchema.validate(req.body);
 
   if (error) {
     throw httpError(400, error.message);

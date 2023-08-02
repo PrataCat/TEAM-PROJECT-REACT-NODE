@@ -56,18 +56,11 @@ const userSchema = Schema(
       default: [],
       required: true,
     },
-    // pets: {
-    //   type: [
-    //     {
-    //       type: Schema.Types.ObjectId,
-    //       ref: "pet",
-    //     },
-    //   ],
-    //   default: [],
-    //   required: true,
-    // },
-
-    pets: [{ type: Schema.Types.ObjectId, ref: "pet", required: true }],
+    pets: { type: [{ type: Schema.Types.ObjectId, ref: "pet" }], default: [] },
+    notices: {
+      type: [{ type: Schema.Types.ObjectId, ref: "notice" }],
+      default: [],
+    },
   },
 
   {

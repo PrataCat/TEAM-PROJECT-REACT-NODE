@@ -21,5 +21,3 @@ const removeFromFavorites = catchAsyncWrapper(async (req, res) => {
 });
 
 module.exports = removeFromFavorites;
-
-// +

@@ -8,7 +8,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:4000" }],
+  "servers": [{ "url": "https://your-pet-backend-ni98.onrender.com/api/" }],
   "tags": [
     {
       "name": "Auth",
@@ -35,7 +35,7 @@
   ],
 
   "paths": {
-    "/api/users/register": {
+    "/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/api/users/verify/:verificationToken": {
+    "/users/verify/{verificationToken}": {
       "get": {
         "tags": ["Auth"],
         "summary": "User email verification",
@@ -100,7 +100,7 @@
         }
       }
     },
-    "/api/users/verify": {
+    "/users/verify": {
       "post": {
         "tags": ["Auth"],
         "summary": "Resent verify email",
@@ -138,7 +138,7 @@
         }
       }
     },
-    "/api/users/login": {
+    "/users/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "User login",
@@ -176,7 +176,7 @@
         }
       }
     },
-    "/api/users/logout": {
+    "/users/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
@@ -197,7 +197,7 @@
         }
       }
     },
-    "/api/users/current": {
+    "/users/current": {
       "get": {
         "tags": ["User"],
         "summary": "Current User information",
@@ -225,7 +225,7 @@
         }
       }
     },
-    "/api/users/avatars": {
+    "/users/avatars": {
       "patch": {
         "tags": ["User"],
         "summary": "Update user's avatar",
@@ -259,7 +259,7 @@
         }
       }
     },
-    "/api/users/update": {
+    "/users/update": {
       "patch": {
         "tags": ["User"],
         "summary": "Update user's information",
@@ -293,7 +293,7 @@
         }
       }
     },
-    "api/news/": {
+    "/news/": {
       "get": {
         "tags": ["News"],
         "summary": "Get news articles",
@@ -344,7 +344,7 @@
       }
     },
 
-    "api/notices/user": {
+    "/notices/user": {
       "get": {
         "tags": ["Notice"],
         "summary": "All user notices",
@@ -365,7 +365,7 @@
         }
       }
     },
-    "api/notices": {
+    "/notices": {
       "get": {
         "tags": ["Notice"],
         "summary": "Find notices by query or category",
@@ -441,7 +441,7 @@
       }
     },
 
-    "api/notices/:noticeId": {
+    "/notices/{noticeId}": {
       "get": {
         "tags": ["Notice"],
         "summary": "Find notice by id",
@@ -504,7 +504,7 @@
         }
       }
     },
-    "api/notices/favorite": {
+    "/notices/favorite": {
       "get": {
         "tags": ["Notice"],
         "summary": "All favorite notices",
@@ -529,7 +529,7 @@
         }
       }
     },
-    "api/notices/:noticeId/favorite": {
+    "/notices/{noticeId}/favorite": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Add notice's favorites",
@@ -562,7 +562,7 @@
         }
       }
     },
-    "api/notices/favorite/:noticeId": {
+    "/notices/favorite/{noticeId}": {
       "patch": {
         "tags": ["Notice"],
         "summary": "Remove notice from favorites",
@@ -589,7 +589,7 @@
         }
       }
     },
-    "/pet": {
+    "pet": {
       "post": {
         "tags": ["Pet"],
         "summary": "Add pet",
@@ -626,7 +626,7 @@
         }
       }
     },
-    "/pet/:petId": {
+    "/pet/{petId}": {
       "delete": {
         "tags": ["Pet"],
         "summary": "Delete pet",
@@ -663,7 +663,7 @@
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["name", "email", "password", "confirmPassword"],
+        "required": ["name", "email", "password"],
         "properties": {
           "name": {
             "type": "string",
@@ -676,11 +676,6 @@
             "format": "email"
           },
           "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          },
-          "confirmPassword": {
             "type": "string",
             "description": "User's password",
             "example": "qwerty123"
