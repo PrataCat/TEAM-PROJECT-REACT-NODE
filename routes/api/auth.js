@@ -5,7 +5,6 @@ const {
   login,
   logout,
   getCurrentUser,
-  updateUserAvatar,
   updateUser,
   verifyEmail,
   resendVerifyEmail,
@@ -38,12 +37,12 @@ router.post("/login", validateLogin(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrentUser);
 router.patch(
-  "/avatars",
+  "/update",
   authenticate,
   upload.single("avatar"),
-  updateUserAvatar
+  validateUpdateUser(),
+  updateUser
 );
-router.patch("/update", authenticate, validateUpdateUser(), updateUser);
 router.get("/pets", authenticate, getMemberData);
 
 module.exports = router;
