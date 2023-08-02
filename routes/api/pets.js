@@ -10,6 +10,6 @@ router.use("/", authenticate);
 
 router.post("/", authenticate, upload.single("file"), addPet);
 
-router.delete("/:petId", validateId("petId"), removePet);
+router.delete("/:petId", authenticate, validateId("petId"), removePet);
 
 module.exports = router;
