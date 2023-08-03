@@ -14,7 +14,6 @@ const getFavorites = catchAsyncWrapper(async (req, res) => {
     .populate("favorite")
     .select("favorite -_id");
 
-
   const totalNotices = noticesAll.favorite.length;
   const totalPages = Math.ceil(totalNotices / perPage);
 
@@ -28,7 +27,7 @@ const getFavorites = catchAsyncWrapper(async (req, res) => {
     })
     .select("favorite -_id");
 
-  const result = { totalPages, favorite: favorite.reverse() };
+  const result = { totalPages, favorite };
 
   res.json(result);
 });
