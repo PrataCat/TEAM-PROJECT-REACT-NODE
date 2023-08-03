@@ -1,22 +1,23 @@
+const { httpError } = require("../../helpers");
 const User = require("../../models/user");
+const { updateUserValidator } = require("../../schemas");
 
 const updateUser = async (req, res, next) => {
   const { _id } = req.user;
-  const { name, contactEmail, phone, birthday, city } = req.body;
+  const { error } = updateUserValidator.validate(req.body);
+  const file = req.file.path;
 
-  const user = await User.findByIdAndUpdate(
+  if (error) {
+    throw httpError(400, error.message);
+  }
+
+  const result = await User.findByIdAndUpdate(
     _id,
-    { name, contactEmail, phone, birthday, city },
+    { ...req.body, file },
     { new: true }
   );
 
-  res.json({
-    name: user.name,
-    contactEmail: user.contactEmail,
-    phone: user.phone,
-    birthday: user.birthday,
-    city: user.city,
-  });
+  res.json(result);
 };
 
 module.exports = updateUser;

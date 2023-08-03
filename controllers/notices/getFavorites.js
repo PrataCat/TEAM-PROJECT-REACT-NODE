@@ -4,6 +4,7 @@ const User = require("../../models/user");
 
 const getFavorites = catchAsyncWrapper(async (req, res) => {
   const { _id } = req.user;
+
   const { page = 1, perPage = 9 } = req.query;
 
   const limit = perPage;
@@ -12,6 +13,7 @@ const getFavorites = catchAsyncWrapper(async (req, res) => {
   const noticesAll = await User.findById(_id)
     .populate("favorite")
     .select("favorite -_id");
+
 
   const totalNotices = noticesAll.favorite.length;
   const totalPages = Math.ceil(totalNotices / perPage);

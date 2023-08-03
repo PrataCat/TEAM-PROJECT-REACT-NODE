@@ -5,7 +5,7 @@ const {
   login,
   logout,
   getCurrentUser,
-  updateUserAvatar,
+  // updateUserAvatar,
   updateUser,
   verifyEmail,
   resendVerifyEmail,
@@ -17,7 +17,7 @@ const {
   validateLogin,
   authenticate,
   upload,
-  validateUpdateUser,
+  // validateUpdateUser,
   validateBody,
 } = require("../../middlewares");
 
@@ -37,13 +37,13 @@ router.post("/verify", validateBody(emailValidator), resendVerifyEmail);
 router.post("/login", validateLogin(), login);
 router.post("/logout", authenticate, logout);
 router.get("/current", authenticate, getCurrentUser);
-router.patch(
-  "/avatars",
-  authenticate,
-  upload.single("avatar"),
-  updateUserAvatar
-);
-router.patch("/update", authenticate, validateUpdateUser(), updateUser);
+// router.patch(
+//   "/avatars",
+//   authenticate,
+//   upload.single("avatar"),
+//   updateUserAvatar
+// );
+router.patch("/update", authenticate, upload.single("avatar"), updateUser);
 router.get("/pets", authenticate, getMemberData);
 
 module.exports = router;

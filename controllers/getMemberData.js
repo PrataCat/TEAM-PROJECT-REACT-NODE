@@ -36,7 +36,7 @@ const getMemberData = catchAsyncWrapper(async (req, res) => {
       avatar,
       favorite,
     },
-    pets: result,
+    pets: result.reverse(),
   });
 });
 
