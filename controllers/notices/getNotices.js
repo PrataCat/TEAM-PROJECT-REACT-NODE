@@ -7,8 +7,8 @@ const getNotices = catchAsyncWrapper(async (req, res) => {
   const {
     query = "",
     category = "sell",
-    page = 3,
-    perPage = 3,
+    page = 1,
+    perPage = 9,
     sex = "",
     // date = 1,
   } = req.query;
