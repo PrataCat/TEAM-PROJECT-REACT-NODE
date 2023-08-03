@@ -5,10 +5,9 @@ const getUserNotices = catchAsyncWrapper(async (req, res) => {
   const { _id: owner } = req.user;
   const { page = 1, perPage = 9 } = req.query;
 
-  const limit = perPage;
-  const skip = (page - 1) * limit;
+  const skip = (page - 1) * perPage;
 
-  const notices = await Notice.find({ owner }, "", { skip, limit });
+  const notices = await Notice.find({ owner }).skip(skip).limit(perPage);
 
   const totalNotices = notices.length;
 
