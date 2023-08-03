@@ -27,7 +27,7 @@ const getFavorites = catchAsyncWrapper(async (req, res) => {
     })
     .select("favorite -_id");
 
-  const result = { totalPages, favorite };
+  const result = { totalPages, favorite: favorite.reverse() };
 
   res.json(result);
 });
