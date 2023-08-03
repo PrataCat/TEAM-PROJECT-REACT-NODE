@@ -6,6 +6,7 @@ const updateUser = async (req, res, next) => {
   const { _id } = req.user;
   const { error } = updateUserValidator.validate(req.body);
   const file = req.file.path;
+  console.log(file);
 
   if (error) {
     throw httpError(400, error.message);
@@ -13,7 +14,7 @@ const updateUser = async (req, res, next) => {
 
   const result = await User.findByIdAndUpdate(
     _id,
-    { ...req.body, file },
+    { ...req.body, avatar: file },
     { new: true }
   );
 
