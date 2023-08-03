@@ -14,7 +14,7 @@ const getUserNotices = catchAsyncWrapper(async (req, res) => {
 
   const totalPages = Math.ceil(totalNotices / perPage);
 
-  const result = { totalPages, notices };
+  const result = { totalPages, notices: notices.reverse() };
 
   res.status(200).json(result);
 });
