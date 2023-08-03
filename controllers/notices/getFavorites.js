@@ -4,32 +4,31 @@ const User = require("../../models/user");
 
 const getFavorites = catchAsyncWrapper(async (req, res) => {
   const { _id } = req.user;
-  
   const { page = 1, perPage = 9 } = req.query;
 
   const limit = perPage;
   const skip = (page - 1) * limit;
 
-  const noticesAll = await User.find(_id).populate("favorite");
-  
-  const user = await User.find(_id).populate({
-    path: "favorite",
-    perDocumentLimit: limit,
-    options: {
-      skip,
-    },
-  });
+  const noticesAll = await User.findById(_id)
+    .populate("favorite")
+    .select("favorite -_id");
 
-  const notices = user[0].favorite;
-
-  const totalNotices = noticesAll[0].favorite.length;
+  const totalNotices = noticesAll.favorite.length;
   const totalPages = Math.ceil(totalNotices / perPage);
 
-  const result = { totalPages, notices };
+  const { favorite } = await User.findById(_id)
+    .populate({
+      path: "favorite",
+      perDocumentLimit: limit,
+      options: {
+        skip,
+      },
+    })
+    .select("favorite -_id");
+
+  const result = { totalPages, favorite: favorite.reverse() };
 
   res.json(result);
 });
 
 module.exports = getFavorites;
-
-// +
