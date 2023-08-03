@@ -21,21 +21,17 @@ const userLoginValidator = (data) => {
   return schema.validate(data);
 };
 
-const updateUserValidator = (data) => {
-  const schema = Joi.object({
-    name: Joi.string().min(2),
-    email: Joi.string().email(),
-    contactEmail: Joi.string().email(),
-    password: Joi.string().min(6),
-    birthday: Joi.date().utc().format(["YYYY-MM-DD"]),
-    phone: Joi.string().regex(
-      /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
-    ),
-    city: Joi.string().min(3),
-  });
-
-  return schema.validate(data);
-};
+const updateUserValidator = Joi.object({
+  name: Joi.string().min(2),
+  email: Joi.string().email(),
+  contactEmail: Joi.string().email(),
+  birthday: Joi.date().utc().format(["YYYY-MM-DD"]),
+  avatar: Joi.string(),
+  phone: Joi.string().regex(
+    /(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/
+  ),
+  city: Joi.string().min(3),
+});
 
 module.exports = {
   userRegisterValidator,
