@@ -29,16 +29,7 @@ const getNotices = catchAsyncWrapper(async (req, res) => {
 
   const noticesQuery = Notices.find(findOptions);
 
-  noticesQuery.skip(skip).limit(perPage);
-                                        
-
-  // noticesQuery.find({ date: { $gt: 2022-08-03 } });
-
-  // noticesQuery.find({ date: { $lte: 2022-08-03 } });
-
-  // noticesQuery.find({ date: { $lte: 2021-08-03 } });
-
-
+  noticesQuery.skip(skip).limit(perPage).sort({ createdAt: -1 });
 
   const notices = await noticesQuery;
 
