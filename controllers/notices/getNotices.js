@@ -33,7 +33,7 @@ const getNotices = catchAsyncWrapper(async (req, res) => {
 
   const notices = await noticesQuery;
 
-  const result = { totalPages, notices: notices.reverse() };
+  const result = { totalPages, notices };
 
   res.status(200).json(result);
 });
