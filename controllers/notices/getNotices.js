@@ -2,8 +2,6 @@ const { catchAsyncWrapper } = require("../../helpers");
 const Notices = require("../../models/notice");
 
 const getNotices = catchAsyncWrapper(async (req, res) => {
-  // const { query = "", category = "sell", page = 1, perPage = 3 } = req.query;
-
   const {
     query = "",
     category = "sell",

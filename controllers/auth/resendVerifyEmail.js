@@ -3,7 +3,7 @@ const { sendEmail } = require("../../helpers");
 const catchAsyncWrapper = require("../../helpers/catchAsyncWrapper");
 const User = require("../../models/user");
 
-const resendVerifyEmail = catchAsyncWrapper(async (req, res, next) => {
+const resendVerifyEmail = catchAsyncWrapper(async (req, res) => {
   const { email } = req.body;
 
   const user = await User.findOne({ email });

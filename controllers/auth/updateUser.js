@@ -2,11 +2,10 @@ const { httpError } = require("../../helpers");
 const User = require("../../models/user");
 const { updateUserValidator } = require("../../schemas");
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
   const { _id } = req.user;
   const { error } = updateUserValidator.validate(req.body);
   const file = req.file.path;
-  console.log(file);
 
   if (error) {
     throw httpError(400, error.message);
